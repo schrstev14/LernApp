@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import HomePage from '/imports/ui/HomePage'
 import LoginPage from '/imports/ui/LoginPage'
-import CoursePage from '/imports/ui/CoursePage'
+import CoursePage from './CoursesPage'
 import CurrentCoursePage from '/imports/ui/CurrentCourse/CurrentCoursePage'
 import Footer from '/imports/ui/Parts/Footer'
 import MarkdownEditorPage from '/imports/ui/MarkdownEditor/MarkdownEditorPage'
