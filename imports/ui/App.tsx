@@ -1,14 +1,38 @@
-import React, {useState} from 'react';
-import MarkdownDisplay from '/imports/ui/MarkdownEditor/MarkdownDisplay'
-import MarkdownEditor from '/imports/ui/MarkdownEditor/MarkdownEditor'
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
+import HomePage from '/imports/ui/HomePage'
+import LoginPage from '/imports/ui/LoginPage'
+import CoursePage from '/imports/ui/CoursePage'
+import CurrentCoursePage from '/imports/ui/CurrentCourse/CurrentCoursePage'
+import Footer from '/imports/ui/Parts/Footer'
+import MarkdownEditorPage from '/imports/ui/MarkdownEditor/MarkdownEditorPage'
+import Header from '/imports/ui/Parts/Header'
 
 export const App = () => {
-  const [value, setValue]= useState('')
-  return(
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <MarkdownEditor value={value} onChange={setValue} editorWidth={400} editorHeight={400}/>
-    <MarkdownDisplay markdown={value} style={{color: 'black'}} contentClass="fnord"/>
-  </div>
+  return (
+    <Router>
+      <Header />
+      <div style={{ flexGrow: 1, backgroundColor: '#A0FEEF', overflowY: 'auto', paddingTop: '1rem'}}>
+        <Switch>
+          <Route path="/markdown-editor">
+            <MarkdownEditorPage />
+          </Route>
+          <Route path="/courses">
+            <CoursePage />
+          </Route>
+          <Route path="/current-course">
+            <CurrentCoursePage/>
+          </Route>
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+          <Route path="/" exact>
+            <HomePage />
+          </Route>
+        </Switch>
+      </div>
+      <Footer />
+    </Router>
   )
 };

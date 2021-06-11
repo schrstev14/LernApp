@@ -38,13 +38,13 @@
 
 // const h = (x) => f(x) + g(x)
 
-console.log('hallo \\n neue zeile')
+// console.log('hallo \\n neue zeile')
 
-() => {
-  [a, setA] = useState(1)
+// () => {
+//   [a, setA] = useState(1)
   
-  const b = a + 1
+//   const b = a + 1
 
-console.log(b)
-  setA(3)
-}
+// console.log(b)
+//   setA(3)
+// }
