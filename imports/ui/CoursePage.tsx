@@ -17,7 +17,7 @@ const CoursePage = () => {
               <Item.Description>
                 Here you learn everything about HTML
               </Item.Description>
-              <Item.Extra><Progress value='0' total='5' progress='percent' /></Item.Extra>
+              <Item.Extra><Progress value='0' total='5' progress='percent' indicating/></Item.Extra>
             </Item.Content>
           </Item>
 
@@ -30,7 +30,7 @@ const CoursePage = () => {
               <Item.Description>
                 Here you learn everything about Math
               </Item.Description>
-              <Item.Extra><Progress value='1' total='5' progress='percent' /></Item.Extra>
+              <Item.Extra><Progress value='1' total='5' progress='percent' indicating/></Item.Extra>
             </Item.Content>
           </Item>
         </Item.Group>
