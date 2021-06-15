@@ -26,11 +26,6 @@ const Header = () => {
         active={location.pathname === '/markdown-editor'}
         onClick={() => history.push('/markdown-editor')}
       />
-       <Menu.Item
-        name='Current-Course'
-        active={location.pathname === '/current-course'}
-        onClick={() => history.push('/current-course')}
-      />
       <Menu.Menu position='right'>
         <Menu.Item
           name='logout'

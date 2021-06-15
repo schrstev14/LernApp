@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React from 'react'
 import markdownIt from 'markdown-it'
 import mark from 'markdown-it-mark'
 import footnote from 'markdown-it-footnote'

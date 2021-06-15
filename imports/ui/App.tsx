@@ -3,11 +3,14 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import HomePage from '/imports/ui/HomePage'
 import LoginPage from '/imports/ui/LoginPage'
-import CoursePage from './CoursePage'
+import CoursesPage from './CoursesPage'
 import CurrentCoursePage from '/imports/ui/CurrentCourse/CurrentCoursePage'
 import Footer from '/imports/ui/Parts/Footer'
 import MarkdownEditorPage from '/imports/ui/MarkdownEditor/MarkdownEditorPage'
 import Header from '/imports/ui/Parts/Header'
+
+import { Roles } from '@alanning/roles'
+import { MongoClient } from 'mongodb'
 
 export const App = () => {
   return (
@@ -19,9 +22,9 @@ export const App = () => {
             <MarkdownEditorPage />
           </Route>
           <Route path="/courses">
-            <CoursePage />
+            <CoursesPage editMode={false}/>
           </Route>
-          <Route path="/current-course">
+          <Route path="/current-course/:id">
             <CurrentCoursePage/>
           </Route>
           <Route path="/login">
