@@ -6,7 +6,6 @@ import LoginPage from '/imports/ui/LoginPage'
 import CoursesPage from './CoursesPage'
 import CurrentCoursePage from '/imports/ui/CurrentCourse/CurrentCoursePage'
 import Footer from '/imports/ui/Parts/Footer'
-import MarkdownEditorPage from '/imports/ui/MarkdownEditor/MarkdownEditorPage'
 import Header from '/imports/ui/Parts/Header'
 import EditPage from '/imports/ui/EditPage'
 
@@ -19,11 +18,8 @@ export const App = () => {
       <Header />
       <div style={{ flexGrow: 1, backgroundColor: '#A0FEEF', overflowY: 'auto', paddingTop: '1rem'}}>
         <Switch>
-          <Route path="/markdown-editor">
-            <MarkdownEditorPage />
-          </Route>
           <Route path="/courses">
-            <CoursesPage editMode={false}/>
+            <CoursesPage editMode={true}/>
           </Route>
           <Route path="/current-course/:id">
             <CurrentCoursePage/>

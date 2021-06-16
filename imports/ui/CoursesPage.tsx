@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import { Item, Container, Progress, Button } from 'semantic-ui-react'
 import { CourseCollection } from '../api/CourseCollection';
 
-const CoursePage = ({editMode} : {editMode: boolean}) => {
+const CoursePage = () => {
   const history = useHistory();
   const courses = useTracker(() => CourseCollection.find().map((course) => (
 
@@ -25,9 +25,6 @@ const CoursePage = ({editMode} : {editMode: boolean}) => {
     <div style={{ padding: '1rem' }} >
       <Container text>
       <Item.Group>
-        {
-          editMode ? <Button>+</Button> : null
-        }
             {courses}
         </Item.Group>
       </Container>
