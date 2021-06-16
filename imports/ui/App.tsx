@@ -8,6 +8,7 @@ import CurrentCoursePage from '/imports/ui/CurrentCourse/CurrentCoursePage'
 import Footer from '/imports/ui/Parts/Footer'
 import MarkdownEditorPage from '/imports/ui/MarkdownEditor/MarkdownEditorPage'
 import Header from '/imports/ui/Parts/Header'
+import EditPage from '/imports/ui/EditPage'
 
 import { Roles } from '@alanning/roles'
 import { MongoClient } from 'mongodb'
@@ -26,6 +27,9 @@ export const App = () => {
           </Route>
           <Route path="/current-course/:id">
             <CurrentCoursePage/>
+          </Route>
+          <Route path="/edit-page">
+            <EditPage />
           </Route>
           <Route path="/login">
             <LoginPage />
