@@ -1,14 +1,17 @@
 import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema'
-
+import { ReactiveVar } from 'meteor/reactive-var'
 
 export interface Topic {
     courseId: string,
     title: string,
     description: string,
-    content: string
+    content: string, 
+    _id?:string
 }
+
+export const editTopicId = new ReactiveVar<string | null>(null)
 
 export const TopicCollection = new Mongo.Collection<Topic>('topic');
 
