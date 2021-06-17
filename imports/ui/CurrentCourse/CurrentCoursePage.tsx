@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { useTracker } from 'meteor/react-meteor-data'
 import { Header, Menu, Segment, Sidebar, Container } from 'semantic-ui-react'
 import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom'
@@ -15,7 +15,7 @@ const CurrentCoursePage = () => {
 
     <List.Item >
       <List.Content>
-        <List.Header as='a' onClick={()=>setCurrentTopic(topic)}>{topic.title}</List.Header>
+        <List.Header as='a' onClick={() => setCurrentTopic(topic)}>{topic.title}</List.Header>
         <List.Description as='a'>{topic.description}</List.Description>
       </List.Content>
     </List.Item>

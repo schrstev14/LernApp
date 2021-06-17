@@ -19,7 +19,7 @@ if (Meteor.isServer) {
 
                 title: `Test${i}`,
                 description: `description${i}`,
-                imageURL:' /images/TestIcon.jpg'
+                imageURL: ' /images/TestIcon.jpg'
             })
         }
     }

@@ -17,13 +17,13 @@ const EditPage = () => {
     <List.Item>
       <List.Content>
         <List.Content>
-      <Button floated='right' secondary>{course.title}-Course@Edit</Button>
-      </List.Content>
+          <Button floated='right' secondary>{course.title}-Course@Edit</Button>
+        </List.Content>
         <List.Header>{course.title}</List.Header>
         <List.Description>{course.description}</List.Description>
         <List.Content >
-        <Button primary>Topic@+</Button>
-          
+          <Button primary>Topic@+</Button>
+
         </List.Content>
         <div style={{ paddingLeft: '1rem' }}>
           <List.List>

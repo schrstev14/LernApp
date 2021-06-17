@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data'
-import { useHistory, useParams } from 'react-router-dom'
-import { Item, Container, Progress, Button } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom'
+import { Item, Container, Progress } from 'semantic-ui-react'
 import { CourseCollection } from '../api/CourseCollection';
 
 const CoursePage = () => {
