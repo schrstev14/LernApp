@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
-import { Header, Menu, Segment, Sidebar, Container } from 'semantic-ui-react'
+import { Loader } from 'semantic-ui-react'
 import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom'
 import { CourseCollection } from '/imports/api/CourseCollection';
 import { Topic, TopicCollection } from '/imports/api/TopicCollection';
@@ -10,6 +11,18 @@ const CurrentCoursePage = () => {
 
   const { id } = useParams()
   const [currentTopic, setCurrentTopic] = useState<Topic | null>(null)
+
+  const isLoadingTopics = useTracker(() => {
+    const handle = Meteor.subscribe('Topics')
+    return !handle.ready()
+  })
+
+  const isLoadingCourses = useTracker(() => {
+    const handle = Meteor.subscribe('Courses')
+    return !handle.ready()
+  })
+  if (isLoadingTopics || isLoadingCourses) { return <div><Loader>Loading</Loader></div> }
+
   const course = useTracker(() => CourseCollection.findOne(id))
   const topics = useTracker(() => TopicCollection.find({ courseId: id }).map((topic) =>
 

@@ -38,3 +38,11 @@ if (Meteor.isServer) {
         }
     }
 }
+
+if (Meteor.isServer) {
+    Meteor.publish('Topics', function publishTopics() {
+        return (
+            TopicCollection.find()
+        )
+    })
+}

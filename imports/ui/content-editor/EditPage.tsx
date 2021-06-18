@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react'
 import { useTracker } from 'meteor/react-meteor-data'
-import { ReactiveVar } from 'meteor/reactive-var'
+import { Meteor } from 'meteor/meteor'
 
-import { Button, Modal, List, Item } from 'semantic-ui-react'
+import { Button, Modal, List, Item, Loader } from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
-import { editCourseId,Course, CourseCollection } from '/imports/api/CourseCollection'
-import MarkdownEditorWithDisplay from './MarkdownEditor/MarkdownEditorWithDispay'
+import { editCourseId, Course, CourseCollection } from '/imports/api/CourseCollection'
 import TopicList from './TopicList'
 import TopicEditor from './TopicEditor'
 import CourseEditor from './CourseEditor'
@@ -16,28 +15,34 @@ const EditPage = () => {
 
 
   const { id } = useParams()
-
-  const courses = useTracker(() => CourseCollection.find({}).map((course) =>
-
-    <List.Item>
-      <List.Content>
+  const isLoading = useTracker(() => {
+    const handle = Meteor.subscribe('Courses')
+    return !handle.ready()
+  })
+  const courses = useTracker(() => CourseCollection.find({}).map((course) => {
+    if (isLoading) { return <div><Loader>Loading</Loader></div> }
+    return (
+      <List.Item>
         <List.Content>
-          <Button floated='right' secondary onClick={() => editCourseId.set(course._id)}>{course.title}-Course@Edit</Button>
-        </List.Content>
-        <List.Header>{course.title}</List.Header>
-        <List.Description>{course.description}</List.Description>
-        <List.Content >
-          <Button primary>Topic@+</Button>
+          <List.Content>
+            <Button floated='right' secondary onClick={() => editCourseId.set(course._id)}>{course.title}-Course@Edit</Button>
+          </List.Content>
+          <List.Header>{course.title}</List.Header>
+          <List.Description>{course.description}</List.Description>
+          <List.Content >
+            <Button primary>Topic@+</Button>
 
+          </List.Content>
+          <div style={{ paddingLeft: '1rem' }}>
+            <List.List>
+              <TopicList courseId={course._id}></TopicList>
+            </List.List>
+          </div>
         </List.Content>
-        <div style={{ paddingLeft: '1rem' }}>
-          <List.List>
-            <TopicList courseId={course._id}></TopicList>
-          </List.List>
-        </div>
-      </List.Content>
-    </List.Item>
-  ))
+      </List.Item>
+    )
+
+  }))
 
   return (
     <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }} >
@@ -50,10 +55,10 @@ const EditPage = () => {
         </List>
       </div>
       <div>
-        <CourseEditor/>
-        <TopicEditor/>
-        <Button onClick={()=>console.log(editContent.get())}>Console.log</Button>
+        <CourseEditor />
+        <TopicEditor />
       </div>
+
     </div>
   )
 }

@@ -7,7 +7,7 @@ export interface Course {
     title: string
     description: string,
     imageURL: string,
-    _id?: string 
+    _id?: string
 }
 
 export const editCourseId = new ReactiveVar<string | null>(null)
@@ -34,4 +34,12 @@ if (Meteor.isServer) {
             })
         }
     }
+}
+
+if (Meteor.isServer) {
+    Meteor.publish('Courses', function publishCourses() {
+        return (
+            CourseCollection.find()
+        )
+    })
 }
