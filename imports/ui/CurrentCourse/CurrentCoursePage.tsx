@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Loader } from 'semantic-ui-react'
-import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { CourseCollection } from '/imports/api/CourseCollection';
 import { Topic, TopicCollection } from '/imports/api/TopicCollection';
 import { List } from 'semantic-ui-react'

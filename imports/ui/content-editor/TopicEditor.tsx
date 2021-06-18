@@ -4,6 +4,17 @@ import { useTracker } from 'meteor/react-meteor-data'
 import { editTopicId, TopicCollection } from '/imports/api/TopicCollection'
 import MarkdownEditorWithDisplay from '../MarkdownEditor/MarkdownEditorWithDispay';
 import { Loader } from 'semantic-ui-react'
+import SimpleSchema from 'simpl-schema';
+import SimpleSchemaBridge from 'uniforms-bridge-simple-schema-2';
+import { AutoForm } from 'uniforms';
+
+const InputSchemaTopic = new SimpleSchema({
+  title: String,
+  description: String,
+  content: String
+  })
+
+  const InputSchemaTopicBridge = new SimpleSchemaBridge(InputSchemaTopic);
 
 const TopicEditor = () => {
   const isLoading = useTracker(() => {
@@ -12,7 +23,7 @@ const TopicEditor = () => {
   })
 
   const topic = useTracker(() => TopicCollection.findOne(editTopicId.get() ?? 'fnord'))
-  const content = topic?.content ?? 'leer'
+  const content = JSON.stringify(topic, null, 2)//topic?.content ?? 'leer'
   function onSave(newValue: string): void {
 
   }
@@ -20,7 +31,6 @@ const TopicEditor = () => {
   return (
     <div style={{ padding: '1rem' }} >
       <MarkdownEditorWithDisplay value={content} onSave={onSave} />
-
     </div>
   )
 }
