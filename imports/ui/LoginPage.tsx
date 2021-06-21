@@ -5,9 +5,9 @@ import SimpleSchema from 'simpl-schema';
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, SubmitField } from '/imports/ui/uniforms-react';
 import { Container } from 'semantic-ui-react'
-​
-​
-SimpleSchema.extendOptions([ 'uniforms' ]);
+
+
+SimpleSchema.extendOptions(['uniforms']);
 
 const loginSchema = new SimpleSchema({
   email: {
@@ -23,7 +23,7 @@ const loginSchema = new SimpleSchema({
     }
   }
 });
-​
+
 const signupSchema = new SimpleSchema({
   email: {
     type: String,
@@ -61,18 +61,18 @@ const signupSchema = new SimpleSchema({
     }
   }
 });
-​
+
 const loginSchemaBridge = new SimpleSchemaBridge(loginSchema);
 const signupSchemaBridge = new SimpleSchemaBridge(signupSchema);
 
 const CustomSubmitField = () => (
-  <div style={{textAlign: 'center'}}>
+  <div style={{ textAlign: 'center' }}>
     <SubmitField value="Login" />
   </div>
 )
-​
+
 const loginForm = () => {
-​
+
   const login = ({ email, password }: { email: string, password: string; }) => {
     Meteor.loginWithPassword(email, password, (error) => {
       if (error) {
@@ -80,50 +80,50 @@ const loginForm = () => {
       }
     });
   };
-​
+
   return (
     <AutoForm
-      schema={ loginSchemaBridge }
-      submitField={ CustomSubmitField }
-      onSubmit={ login }
+      schema={loginSchemaBridge}
+      submitField={CustomSubmitField}
+      onSubmit={login}
     />
   );
 };
-​
-​
+
+
 const signupForm = () => {
-​
+
   const signup = (model: { username: string, email: string, password: string; }) => {
-    console.log({model})
+    console.log({ model })
     Accounts.createUser(model, (error) => {
       if (error) {
         alert('User Account konnte nicht angelegt werden: ' + error?.message);
       }
     });
   };
-​
+
   return (
     <AutoForm
-      schema={ signupSchemaBridge }
-      submitField={ CustomSubmitField }
-      onSubmit={ signup }
+      schema={signupSchemaBridge}
+      submitField={CustomSubmitField}
+      onSubmit={signup}
     />
   );
 };
-​
-​
+
+
 const LoginPage = () => {
-  const [ hasAccount, setHasAccount ] = useState(true);
-​
+  const [hasAccount, setHasAccount] = useState(true);
+
   const Form = hasAccount ? loginForm : signupForm;
   const toggleString = hasAccount ? 'Ich habe noch keinen Account' : 'Ich habe bereits einen Account';
-​
+
   return (
     <Container text>
       <Form />
-      <div style={{color: 'blue' , textDecoration: 'underline', textAlign: 'center'}} onClick={ () => setHasAccount(!hasAccount) }>{ toggleString }</div>
+      <div style={{ color: 'blue', textDecoration: 'underline', textAlign: 'center' }} onClick={() => setHasAccount(!hasAccount)}>{toggleString}</div>
     </Container>
   );
 };
-​
+
 export default LoginPage;

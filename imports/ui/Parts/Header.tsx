@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useLocation } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 
@@ -22,14 +22,9 @@ const Header = () => {
         onClick={() => history.push('/courses')}
       />
       <Menu.Item
-        name='Markdown-Editor'
-        active={location.pathname === '/markdown-editor'}
-        onClick={() => history.push('/markdown-editor')}
-      />
-       <Menu.Item
-        name='Current-Course'
-        active={location.pathname === '/current-course'}
-        onClick={() => history.push('/current-course')}
+        name='Edit'
+        active={location.pathname === '/edit-page'}
+        onClick={() => history.push('/edit-page')}
       />
       <Menu.Menu position='right'>
         <Menu.Item
