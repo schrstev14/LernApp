@@ -19,7 +19,7 @@ export const App = () => {
       <div style={{ flexGrow: 1, backgroundColor: '#A0FEEF', overflowY: 'auto', paddingTop: '1rem'}}>
         <Switch>
           <Route path="/courses">
-            <CoursesPage editMode={true}/>
+            <CoursesPage/>
           </Route>
           <Route path="/current-course/:id">
             <CurrentCoursePage/>
