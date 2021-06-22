@@ -7,8 +7,8 @@ export interface Topic {
     courseId: string,
     title: string,
     description: string,
-    content: string, 
-    _id?:string
+    content: string,
+    _id?: string
 }
 
 export const editTopicId = new ReactiveVar<string | null>(null)
@@ -46,3 +46,25 @@ if (Meteor.isServer) {
         )
     })
 }
+
+Meteor.methods({
+    'topics.save'({ _id, courseId, title, description, content }) {
+        new SimpleSchema({
+            _id: { type: String },
+            courseId: { type: String },
+            title: { type: String },
+            description: { type: String },
+            content: { type: String },
+
+        }).validate({ _id, courseId, title, description, content });
+
+        TopicCollection.update(_id, {
+            $set: {
+                courseId: courseId,
+                title: title,
+                description: description,
+                content: content
+            }
+        });
+    }
+});

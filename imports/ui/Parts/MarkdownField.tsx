@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import classnames from 'classnames';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 import AceEditor from 'react-ace'
@@ -9,16 +9,28 @@ import { useMeasure } from "react-use";
 
 export type MarkdownFieldProps = HTMLFieldProps<string, HTMLDivElement>;
 
-function UnMk({ onChange, value, label, disabled, error, required, errorMessage, className, showInlineError,id, ...props }: MarkdownFieldProps) {
+function UnMk({
+  onChange,
+  value,
+  label,
+  disabled,
+  error,
+  required,
+  errorMessage,
+  className,
+  showInlineError,
+  id,
+  ...props
+}: MarkdownFieldProps) {
 
-  const [ref, { x, y, width, height, top, right, bottom, left }] = useMeasure();
-  console.log({ width, height })
+  const [ref, { width }] = useMeasure();
+
   return (
-    <div className={classnames(className, { disabled, error, required }, 'field')} {...filterDOMProps(props)} ref={ref}>
-
+    <div className={classnames(className, { disabled, error, required, value }, 'field')} {...filterDOMProps(props)} ref={ref}>
+      {/* <pre>{JSON.stringify(value, null, 2)}</pre> */}
       {label && <label htmlFor={id}>{label}</label>}
-
-      <AceEditor mode="markdown" theme="chrome" width={width} height={200} value={value} onChange={onChange} setOptions={{
+      {/* CHECK */}
+      <AceEditor mode="markdown" theme="chrome" width={width} height={200} value={value} onChange={(newValue) => onChange(newValue)} setOptions={{
         wrap: true,
         showInvisibles: true
       }} />

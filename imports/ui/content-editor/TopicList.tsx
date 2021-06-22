@@ -17,7 +17,7 @@ const TopicList = ({ courseId }) => {
 
     const topics = useTracker(() => TopicCollection.find({ courseid: id }).map((topic) =>
 
-        <List.Item style={{ paddingBottom: '2rem' }}>
+        <List.Item style={{ paddingBottom: '2rem' }} key={topic._id}>
             <List.Content>
                 <List.Content>
                     <Button floated='right' secondary onClick={() => editTopicId.set(topic._id)}>edit</Button>
