@@ -51,20 +51,34 @@ Meteor.methods({
     'topics.save'({ _id, courseId, title, description, content }) {
         new SimpleSchema({
             _id: { type: String },
-            courseId: { type: String },
-            title: { type: String },
-            description: { type: String },
-            content: { type: String },
+            courseId: { type: String, required: true },
+            title: { type: String, required: true },
+            description: { type: String, required: true },
+            content: { type: String, required: true },
 
-        }).validate({ _id, courseId, title, description, content });
+        }, { requiredByDefault: false }).validate({ _id, courseId, title, description, content });
 
-        TopicCollection.update(_id, {
-            $set: {
+
+        if (_id)
+            TopicCollection.update(_id, {
+                $set: {
+                    courseId: courseId,
+                    title: title,
+                    description: description,
+                    content: content
+                }
+            })
+        else {
+            TopicCollection.insert({
                 courseId: courseId,
                 title: title,
                 description: description,
                 content: content
-            }
-        });
+            });
+        }
+        
+        
+        
+        );
     }
 });

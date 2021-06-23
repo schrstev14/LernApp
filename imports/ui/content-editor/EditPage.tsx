@@ -21,18 +21,16 @@ const EditPage = () => {
   })
   const courses = useTracker(() => CourseCollection.find({}).map((course) => {
     if (isLoading) { return <div><Loader>Loading</Loader></div> }
+    console.log(editCourseId)
     return (
       <List.Item key={course._id}>
-        <Button primary onClick={() => editCourseId.set('new')}>Course@+</Button>
+        <Button primary onClick={() => editCourseId.set('0')}>Course@+</Button>
         <List.Content>
           <List.Content>
             <Button floated='right' secondary onClick={() => editCourseId.set(course._id)}>{course.title}-Course@Edit</Button>
           </List.Content>
           <List.Header>{course.title}</List.Header>
           <List.Description>{course.description}</List.Description>
-          <List.Content >
-            <Button primary onClick={() => 'new'}>Topic@+</Button>
-          </List.Content>
           <div style={{ paddingLeft: '1rem' }}>
             <List.List>
               <TopicList courseId={course._id}></TopicList>

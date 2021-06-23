@@ -48,10 +48,11 @@ Meteor.methods({
     'courses.save'({ _id, title, description, imageURL }) {
         new SimpleSchema({
             _id: { type: String },
-            title: { type: String },
-            description: { type: String },
-            imageURL: { type: String }
-        }).validate({ _id, title, description, imageURL });
+            title: { type: String, required: true },
+            description: { type: String, required: true },
+            imageURL: { type: String, required: true }
+        }, { requiredByDefault: false }).validate({ _id, title, description, imageURL });
+
         if (_id) {
             CourseCollection.update(_id, {
                 $set: {

@@ -31,6 +31,7 @@ const TopicList = ({ courseId }) => {
     if (isLoading) { return <div><Loader>Loading</Loader></div> }
     return (
         <div>
+            <Button primary onClick={() => editTopicId.set('0')}>Topic@+</Button>
             {topics}
         </div>
     )
