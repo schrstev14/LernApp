@@ -12,7 +12,7 @@ import CourseEditor from './CourseEditor'
 //verschachtelte Listen + buttons (+ | edit) -> semantic ui model, 
 
 const EditPage = () => {
-
+  const user = useTracker(() => Meteor.user());
 
   const { id } = useParams()
   const isLoading = useTracker(() => {
@@ -23,6 +23,7 @@ const EditPage = () => {
     if (isLoading) { return <div><Loader>Loading</Loader></div> }
     console.log(editCourseId)
     return (
+      
       <List.Item key={course._id}>
         <Button primary onClick={() => editCourseId.set('0')}>Course@+</Button>
         <List.Content>
@@ -43,19 +44,25 @@ const EditPage = () => {
   }))
 
   return (
-    <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }} >
-
-      <div style={{ width: '20rem', marginRight: '10rem' }}>
-
-        <List divided verticalAlign='middle'>
-          {courses}
-        </List>
+    <div  >
+{Roles.userIsInRole(user, ['EDIT']) ? (
+      <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
+        <div style={{ width: '20rem', marginRight: '10rem' }}>
+  
+          <List divided verticalAlign='middle'>
+            {courses}
+          </List>
+        </div>
+        <div>
+          <CourseEditor />
+          <TopicEditor />
+        </div>
       </div>
-      <div>
-        <CourseEditor />
-        <TopicEditor />
-      </div>
-
+        ) : (
+          <div style={{backgroundColor: 'red'}}>
+            <h1>Not Allowed</h1>
+          </div>
+        )}
     </div>
   )
 }

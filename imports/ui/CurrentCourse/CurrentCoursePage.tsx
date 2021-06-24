@@ -21,7 +21,6 @@ const CurrentCoursePage = () => {
     const handle = Meteor.subscribe('Courses')
     return !handle.ready()
   })
-  if (isLoadingTopics || isLoadingCourses) { return <div><Loader>Loading</Loader></div> }
 
   const course = useTracker(() => CourseCollection.findOne(id))
   const topics = useTracker(() => TopicCollection.find({ courseId: id }).map((topic) =>
@@ -34,6 +33,7 @@ const CurrentCoursePage = () => {
     </List.Item>
 
   ))
+  if (isLoadingTopics || isLoadingCourses) { return <div><Loader>Loading</Loader></div> }
 
   return (
 

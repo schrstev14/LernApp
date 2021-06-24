@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import { useTracker } from 'meteor/react-meteor-data'
+import { Meteor } from 'meteor/meteor'
+
 import HomePage from '/imports/ui/HomePage'
 import LoginPage from '/imports/ui/LoginPage'
 import CoursesPage from './CoursesPage'
@@ -8,28 +11,31 @@ import CurrentCoursePage from '/imports/ui/CurrentCourse/CurrentCoursePage'
 import Footer from '/imports/ui/Parts/Footer'
 import Header from '/imports/ui/Parts/Header'
 import EditPage from '/imports/ui/content-editor/EditPage'
+import UserManagement from '/imports/ui/UserManagement'
 
-import { Roles } from '@alanning/roles'
-import { MongoClient } from 'mongodb'
 
 export const App = () => {
   return (
-    <Router>
+    
+    <Router> 
       <Header />
-      <div style={{ flexGrow: 1, backgroundColor: '#A0FEEF', overflowY: 'auto', paddingTop: '1rem'}}>
+      <div style={{ flexGrow: 1, backgroundColor: '#A0FEEF', overflowY: 'auto', paddingTop: '1rem' }}>
         <Switch>
           <Route path="/courses">
-            <CoursesPage/>
+            <CoursesPage />
           </Route>
           <Route path="/current-course/:id">
-            <CurrentCoursePage/>
+            <CurrentCoursePage />
           </Route>
           <Route path="/login">
             <LoginPage />
           </Route>
-          <Route path="/edit-page">
-            <EditPage />
-          </Route>
+            <Route path="/edit-page">
+              <EditPage />
+            </Route>
+            <Route path="/user-management">
+              <UserManagement />
+            </Route>
           <Route path="/" exact>
             <HomePage />
           </Route>

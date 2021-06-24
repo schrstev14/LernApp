@@ -1,4 +1,6 @@
 import React, { useEffect } from 'react';
+import { useTracker } from 'meteor/react-meteor-data'
+import {Meteor} from 'meteor/meteor'
 import { useHistory, useLocation } from 'react-router-dom'
 import { Menu } from 'semantic-ui-react'
 
@@ -6,8 +8,14 @@ import { Menu } from 'semantic-ui-react'
 const Header = () => {
   const history = useHistory();
   const location = useLocation()
+  const user = useTracker(() => Meteor.user());
 
   useEffect(() => console.log(location), [location])
+
+  function logout(){
+    history.push('/login')
+    Meteor.logout()
+  }
 
   return (
     <Menu pointing secondary>
@@ -21,16 +29,25 @@ const Header = () => {
         active={location.pathname === '/courses'}
         onClick={() => history.push('/courses')}
       />
-      <Menu.Item
-        name='Edit'
-        active={location.pathname === '/edit-page'}
-        onClick={() => history.push('/edit-page')}
-      />
+      {Roles.userIsInRole(user, ['EDIT']) ? (
+        <Menu.Item
+          name='Edit'
+          active={location.pathname === '/edit-page'}
+          onClick={() => history.push('/edit-page')}
+        />) : ('')
+      }
+      {Roles.userIsInRole(user, ['Admin']) ? (
+        <Menu.Item
+          name='UserManagement'
+          active={location.pathname === '/user-management'}
+          onClick={() => history.push('/user-management')}
+        />) : ('')
+      }
       <Menu.Menu position='right'>
         <Menu.Item
           name='logout'
           active={location.pathname === '/login'}
-          onClick={() => history.push('/login')}
+          onClick={() => logout()}
         />
       </Menu.Menu>
     </Menu>
