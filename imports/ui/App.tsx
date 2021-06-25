@@ -15,9 +15,9 @@ import UserManagement from '/imports/ui/UserManagement'
 
 
 export const App = () => {
+  
   return (
-    
-    <Router> 
+    <Router>
       <Header />
       <div style={{ flexGrow: 1, backgroundColor: '#A0FEEF', overflowY: 'auto', paddingTop: '1rem' }}>
         <Switch>
@@ -30,12 +30,12 @@ export const App = () => {
           <Route path="/login">
             <LoginPage />
           </Route>
-            <Route path="/edit-page">
-              <EditPage />
-            </Route>
-            <Route path="/user-management">
-              <UserManagement />
-            </Route>
+          <Route path="/edit-page">
+            <EditPage />
+          </Route>
+          <Route path="/user-management">
+            <UserManagement />
+          </Route>
           <Route path="/" exact>
             <HomePage />
           </Route>

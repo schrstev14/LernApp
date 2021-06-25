@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import '/imports/api/api'
+import SimpleSchema from 'simpl-schema'
+import {RadioField} from '/imports/ui/uniforms-react';
 import { Accounts } from 'meteor/accounts-base';
 import { useTracker } from 'meteor/react-meteor-data'
 
@@ -37,9 +39,22 @@ Meteor.publish(null, function () {
 })
 
 Meteor.publish(null, function () {
-    if (Roles.userIsInRole(this.userId, ['Admin'])) {
-    return Meteor.users.find({}); 
+  if (Roles.userIsInRole(this.userId, ['Admin'])) {
+    return Meteor.users.find({});
   } else {
     this.ready()
   }
 })
+
+Meteor.methods({
+  'rolechange'( user, role ) {
+    new SimpleSchema({
+      user: { type: String },
+      role: { type: String },
+  }).validate({ user, role });
+      Roles.setUserRoles(user, [role])
+      console.log(user, [role])
+    }
+});
+// Roles.addUsersToRoles('KuP9fgkgd3n4FN3Yi', 'Admin', { unlessExists: true });
+// Roles.setUserRoles('KuP9fgkgd3n4FN3Yi', 'Admin', { unlessExists: true });
