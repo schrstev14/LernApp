@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom'
 
 import { Topic, TopicCollection, editTopicId } from '/imports/api/TopicCollection'
 
-const TopicList = ({ courseId }) => {
+const TopicList = ( {courseId} ) => {
     const { id } = useParams()
 
     const isLoading = useTracker(() => {
@@ -15,7 +15,7 @@ const TopicList = ({ courseId }) => {
         return !handle.ready()
     })
 
-    const topics = useTracker(() => TopicCollection.find({ courseid: id }).map((topic) =>
+    const topics = useTracker(() => TopicCollection.find( {courseId} ).map((topic) =>
 
         <List.Item style={{ paddingBottom: '2rem' }} key={topic._id}>
             <List.Content>

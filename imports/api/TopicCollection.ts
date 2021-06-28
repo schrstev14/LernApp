@@ -3,6 +3,8 @@ import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema'
 import { ReactiveVar } from 'meteor/reactive-var'
 
+import { CourseCollection } from '/imports/api/CourseCollection';
+import { useTracker } from 'meteor/react-meteor-data'
 export interface Topic {
     courseId: string,
     title: string,
@@ -26,16 +28,20 @@ const TopicCollectionSchema = new SimpleSchema({
 // @ts-ignore
 TopicCollection.attachSchema(TopicCollectionSchema)
 
+
+
 if (Meteor.isServer) {
     if (TopicCollection.find().count() == 0) {
-        for (let i = 0; i < 20; i++) {
-            TopicCollection.insert({
-                courseId: 'QWrJBojYE4TD947MW',
-                title: `Test${i}`,
-                description: `description${i}`,
-                content: `test${i}`
-            })
-        }
+        const course = useTracker(() => CourseCollection.find({}).map((course) => {
+            for (let i = 0; i < 5; i++) {
+                TopicCollection.insert({
+                    courseId: course._id ?? 'fnord' ,
+                    title: `Test${i}`,
+                    description: `description${i}`,
+                    content: `test${i}`
+                })
+            }
+        }))
     }
 }
 
