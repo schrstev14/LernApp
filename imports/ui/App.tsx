@@ -1,8 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
-import { useTracker } from 'meteor/react-meteor-data'
-import { Meteor } from 'meteor/meteor'
 
 import HomePage from '/imports/ui/HomePage'
 import LoginPage from '/imports/ui/LoginPage'

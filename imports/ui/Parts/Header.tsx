@@ -45,7 +45,7 @@ const Header = () => {
       }
       <Menu.Menu position='right'>
         <Menu.Item
-          name='logout'
+          name={user ? ('logout'):('Login')}
           active={location.pathname === '/login'}
           onClick={() => logout()}
         />

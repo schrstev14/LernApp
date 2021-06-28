@@ -21,9 +21,8 @@ const EditPage = () => {
   })
   const courses = useTracker(() => CourseCollection.find({}).map((course) => {
     if (isLoading) { return <div><Loader>Loading</Loader></div> }
-    console.log(editCourseId)
     return (
-      
+
       <List.Item key={course._id}>
         <Button primary onClick={() => editCourseId.set('0')}>Course@+</Button>
         <List.Content>
@@ -45,21 +44,21 @@ const EditPage = () => {
 
   return (
     <div  >
-{Roles.userIsInRole(user, ['EDIT']) ? (
-      <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
-        <div style={{ width: '20rem', marginRight: '10rem' }}>
-  
-          <List divided verticalAlign='middle'>
-            {courses}
-          </List>
+      {Roles.userIsInRole(user, ['EDIT']) ? (
+        <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
+          <div style={{ width: '20rem', marginRight: '10rem' }}>
+
+            <List divided verticalAlign='middle'>
+              {courses}
+            </List>
+          </div>
+          <div>
+            <CourseEditor />
+            <TopicEditor />
+          </div>
         </div>
-        <div>
-          <CourseEditor />
-          <TopicEditor />
-        </div>
-      </div>
-        ) : (
-          <div style={{backgroundColor: 'red'}}>
+      ) : (
+          <div style={{ backgroundColor: 'red' }}>
             <h1>Not Allowed</h1>
           </div>
         )}

@@ -6,8 +6,9 @@ import SimpleSchemaBridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm, SubmitField } from '/imports/ui/uniforms-react';
 import { Container } from 'semantic-ui-react'
 
-
 SimpleSchema.extendOptions(['uniforms']);
+
+var LoginButton = true
 
 const loginSchema = new SimpleSchema({
   email: {
@@ -67,12 +68,12 @@ const signupSchemaBridge = new SimpleSchemaBridge(signupSchema);
 
 const CustomSubmitField = () => (
   <div style={{ textAlign: 'center' }}>
-    <SubmitField value="Login" />
+    <SubmitField value={LoginButton ? ('Login'):('Sign Up')} />
   </div>
 )
 
 const loginForm = () => {
-
+  LoginButton = true
   const login = ({ email, password }: { email: string, password: string; }) => {
     Meteor.loginWithPassword(email, password, (error) => {
       if (error) {
@@ -92,12 +93,17 @@ const loginForm = () => {
 
 
 const signupForm = () => {
-
+  LoginButton = false
   const signup = (model: { username: string, email: string, password: string; }) => {
     console.log({ model })
     Accounts.createUser(model, (error) => {
       if (error) {
         alert('User Account konnte nicht angelegt werden: ' + error?.message);
+      }
+      else{
+      // @ts-ignore
+      Meteor.callAsync('newuserrole', Meteor.userId())
+      console.log(Meteor.userId())
       }
     });
   };

@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import '/imports/api/api'
 import SimpleSchema from 'simpl-schema'
-import {RadioField} from '/imports/ui/uniforms-react';
+import { RadioField } from '/imports/ui/uniforms-react';
 import { Accounts } from 'meteor/accounts-base';
 import { useTracker } from 'meteor/react-meteor-data'
 
@@ -47,14 +47,25 @@ Meteor.publish(null, function () {
 })
 
 Meteor.methods({
-  'rolechange'( user, role ) {
+  'rolechange'(user, role) {
     new SimpleSchema({
       user: { type: String },
       role: { type: String },
-  }).validate({ user, role });
+    }).validate({ user, role });
+    if (Roles.userIsInRole(this.userId, ['Admin'])) {
       Roles.setUserRoles(user, [role])
-      console.log(user, [role])
+    } else {
+      throw new Meteor.Error('No Permission', 'You have no Permission to do that');
     }
+  }
 });
-// Roles.addUsersToRoles('KuP9fgkgd3n4FN3Yi', 'Admin', { unlessExists: true });
-// Roles.setUserRoles('KuP9fgkgd3n4FN3Yi', 'Admin', { unlessExists: true });
+
+Meteor.methods({
+  'newuserrole'(user) {
+    new SimpleSchema({
+      user: { type: String }
+    }).validate({ user});
+    Roles.addUsersToRoles ( user,  ['User'] )
+    Roles.setUserRoles(user, ['User'])
+  }
+});
