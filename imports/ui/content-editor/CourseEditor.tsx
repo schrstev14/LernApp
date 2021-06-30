@@ -2,11 +2,18 @@ import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 import { Loader, Container } from 'semantic-ui-react'
+import { SubmitField } from '/imports/ui/uniforms-react';
 import { editCourseId, CourseCollection } from '/imports/api/CourseCollection';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm } from '/imports/ui/uniforms-react';
 import MarkdownField from '/imports/ui/Parts/MarkdownField'
+
+const CustomSubmitField = () => (
+  <div style={{ textAlign: 'center' }}>
+    <SubmitField value='Save' />
+  </div>
+)
 
 SimpleSchema.extendOptions(['uniforms']);
 
@@ -53,7 +60,7 @@ const CourseEditor = () => {
   return (
     <div style={{ padding: '1rem' }} >
       <Container text>
-        <AutoForm schema={InputSchemaCourseBridge} onSubmit={onSave} model={course} />
+        <AutoForm schema={InputSchemaCourseBridge} onSubmit={onSave} model={course} submitField={CustomSubmitField}/>
       </Container>
     </div>
   )

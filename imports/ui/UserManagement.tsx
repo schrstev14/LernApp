@@ -11,7 +11,11 @@ SimpleSchema.extendOptions(['uniforms']);
 const manageSchema = new SimpleSchema({
   user: { type: Object },
   "user._id": {
-    type: String
+    type: String,
+    // @ts-ignore
+    uniforms: {
+    disabled: true
+    }
   },
   role: { type: Object },
   "role._id": {
@@ -44,6 +48,7 @@ const UserManagement = () => {
           //onChange={RoleChange}
           onSubmit={RoleChange}
           model={roles}
+          key={roles.key}
         />
       </Container>
     )

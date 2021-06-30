@@ -3,10 +3,17 @@ import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import { editTopicId, TopicCollection } from '/imports/api/TopicCollection'
 import { Loader, Container } from 'semantic-ui-react'
+import { SubmitField } from '/imports/ui/uniforms-react';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema-2';
 import { AutoForm } from '/imports/ui/uniforms-react';
 import MarkdownField from '/imports/ui/Parts/MarkdownField'
+
+const CustomSubmitField = () => (
+  <div style={{ textAlign: 'center' }}>
+    <SubmitField value='Save' />
+  </div>
+)
 
 SimpleSchema.extendOptions(['uniforms']);
 
@@ -61,7 +68,7 @@ const TopicEditor = () => {
   return (
     <div style={{ padding: '1rem' }} >
       <Container text>
-        <AutoForm schema={InputSchemaTopicBridge} onSubmit={onSave} model={topic} />
+        <AutoForm schema={InputSchemaTopicBridge} onSubmit={onSave} model={topic} submitField={CustomSubmitField}/>
       </Container>
     </div>
   )

@@ -35,7 +35,7 @@ if (Meteor.isServer) {
         const course = useTracker(() => CourseCollection.find({}).map((course) => {
             for (let i = 0; i < 5; i++) {
                 TopicCollection.insert({
-                    courseId: course._id ?? 'fnord' ,
+                    courseId: course._id ?? 'fnord',
                     title: `Test${i}`,
                     description: `description${i}`,
                     content: `test${i}`
@@ -64,27 +64,41 @@ Meteor.methods({
 
         }, { requiredByDefault: false }).validate({ _id, courseId, title, description, content });
 
-
-        if (_id)
-            TopicCollection.update(_id, {
-                $set: {
+        if (Roles.userIsInRole(this.userId, ['EDIT'])) {
+            if (_id) {
+                TopicCollection.update(_id, {
+                    $set: {
+                        courseId: courseId,
+                        title: title,
+                        description: description,
+                        content: content
+                    }
+                })
+            }
+            else {
+                TopicCollection.insert({
                     courseId: courseId,
                     title: title,
                     description: description,
                     content: content
-                }
-            })
-        else {
-            TopicCollection.insert({
-                courseId: courseId,
-                title: title,
-                description: description,
-                content: content
-            });
+                });
+            }
+        } else {
+            throw new Meteor.Error('No Permission', 'You have no Permission to do that');
         }
-        
-        
-        
-        );
+    }
+});
+
+Meteor.methods({
+    'topicremove'(id) {
+        new SimpleSchema({
+            id: { type: String }
+        }).validate({ id });
+        if (Roles.userIsInRole(this.userId, ['EDIT'])) {
+            TopicCollection.remove(id)
+        } else {
+            throw new Meteor.Error('No Permission', 'You have no Permission to do that');
+        }
+
     }
 });

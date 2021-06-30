@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom'
 import { CourseCollection } from '/imports/api/CourseCollection';
 import { Topic, TopicCollection } from '/imports/api/TopicCollection';
 import { List } from 'semantic-ui-react'
+import MarkdownDisplay from '/imports/ui/MarkdownDisplay'
 
 const CurrentCoursePage = () => {
 
@@ -25,9 +26,9 @@ const CurrentCoursePage = () => {
   const course = useTracker(() => CourseCollection.findOne(id))
   const topics = useTracker(() => TopicCollection.find({ courseId: id }).map((topic) =>
 
-    <List.Item >
+    <List.Item onClick={() => setCurrentTopic(topic)}>
       <List.Content>
-        <List.Header as='a' onClick={() => setCurrentTopic(topic)}>{topic.title}</List.Header>
+        <List.Header as='a' >{topic.title}</List.Header>
         <List.Description as='a'>{topic.description}</List.Description>
       </List.Content>
     </List.Item>
@@ -45,7 +46,7 @@ const CurrentCoursePage = () => {
       </div>
       {/* Content */}
       <div>
-        {currentTopic?.content}
+        <MarkdownDisplay markdown={currentTopic?.content} style={{ color: 'black' }} contentClass="fnord" />
       </div>
 
     </div>

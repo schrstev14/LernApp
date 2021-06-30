@@ -52,21 +52,38 @@ Meteor.methods({
             description: { type: String, required: true },
             imageURL: { type: String, required: true }
         }, { requiredByDefault: false }).validate({ _id, title, description, imageURL });
-
-        if (_id) {
-            CourseCollection.update(_id, {
-                $set: {
+        if (Roles.userIsInRole(this.userId, ['EDIT'])) {
+            if (_id) {
+                CourseCollection.update(_id, {
+                    $set: {
+                        title: title,
+                        description: description,
+                        imageURL: imageURL
+                    }
+                });
+            } else {
+                CourseCollection.insert({
                     title: title,
                     description: description,
                     imageURL: imageURL
-                }
-            });
+                });
+            }
         } else {
-            CourseCollection.insert({
-                title: title,
-                description: description,
-                imageURL: imageURL
-            });
+            throw new Meteor.Error('No Permission', 'You have no Permission to do that');
         }
+    }
+});
+
+Meteor.methods({
+    'courseremove'(id) {
+        new SimpleSchema({
+            id: { type: String }
+        }).validate({ id });
+        if (Roles.userIsInRole(this.userId, ['EDIT'])) {
+            CourseCollection.remove(id)
+        } else {
+            throw new Meteor.Error('No Permission', 'You have no Permission to do that');
+        }
+
     }
 });

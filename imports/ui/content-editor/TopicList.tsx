@@ -14,13 +14,17 @@ const TopicList = ( {courseId} ) => {
         const handle = Meteor.subscribe('Topics')
         return !handle.ready()
     })
-
+    function remove(id){
+        //@ts-ignore
+        Meteor.callAsync('topicremove', id)
+      }
     const topics = useTracker(() => TopicCollection.find( {courseId} ).map((topic) =>
 
         <List.Item style={{ paddingBottom: '2rem' }} key={topic._id}>
             <List.Content>
                 <List.Content>
-                    <Button floated='right' secondary onClick={() => editTopicId.set(topic._id)}>edit</Button>
+                    <Button floated='right' color={'red'} onClick={() => remove(topic._id)}>Delete</Button>
+                    <Button floated='right' primary onClick={() => editTopicId.set(topic._id)}>edit</Button>
                 </List.Content>
                 <List.Header as='a'>{topic.title}</List.Header>
                 <List.Description as='a'>{topic.description}</List.Description>
@@ -31,7 +35,7 @@ const TopicList = ( {courseId} ) => {
     if (isLoading) { return <div><Loader>Loading</Loader></div> }
     return (
         <div>
-            <Button primary onClick={() => editTopicId.set('0')}>Topic@+</Button>
+            <Button color={'green'} onClick={() => editTopicId.set('0')}>Topic@+</Button>
             {topics}
         </div>
     )

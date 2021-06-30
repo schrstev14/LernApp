@@ -8,16 +8,22 @@ import { Meteor } from 'meteor/meteor'
 
 const HomePage = () => {
     const user = useTracker(() => Meteor.user());
-  const history = useHistory();
+    const history = useHistory();
     return (
-        <Container text  style={{ textAlign: 'center' }}>
-            <div>
-                <h1  style={{ textDecoration: 'underline' }}>Welcome {user?.username}</h1>
-                <h3>
-                    You have the Roles: {Roles.getRolesForUser(user)}
-                </h3>
-            </div>
-            <Button onClick={() =>history.push('/courses')}>Aktuelle Course</Button>
+        <Container text style={{ textAlign: 'center' }}>
+            {user ? (
+                <div>
+                    <h1 style={{ textDecoration: 'underline' }}>Welcome "{user.username}"</h1>
+                    <h3>
+                        You have the Roles: {Roles.getRolesForUser(user)}
+                    </h3>
+                </div>
+            ) : (
+                    <div>
+                        <h1 style={{ textDecoration: 'underline' }} onClick={() => history.push('/login')}>Please LogIn to your Account or SignUp</h1>
+                    </div>
+                )}
+            <Button onClick={() => history.push('/courses')}>Aktuelle Course</Button>
         </Container>
     )
 }
