@@ -15,7 +15,7 @@ const CoursePage = () => {
 
   const courses = useTracker(() => CourseCollection.find().map((course) => {
     return(
-    <Item onClick={() => history.push(`/current-course/${course._id}`)}>
+    <Item key={course._id} onClick={() => history.push(`/current-course/${course._id}`)}>
       <Item.Image size='tiny' src={course.imageURL} />
 
       <Item.Content>

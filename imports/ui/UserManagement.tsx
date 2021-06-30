@@ -42,13 +42,12 @@ const UserManagement = () => {
   const user = useTracker(() => Meteor.user());
   const UserRoles = useTracker(() => Meteor.roleAssignment.find({}).map((roles) => {
     return (
-      <Container key={roles.key} text style={{ border: 'solid', borderWidth: '2px', borderCollapse: 'collapse', padding: '1rem' }}>
+      <Container key={roles._id} text style={{ border: 'solid', borderWidth: '2px', borderCollapse: 'collapse', padding: '1rem' }}>
         <AutoForm
           schema={manageSchemaBridge}
           //onChange={RoleChange}
           onSubmit={RoleChange}
           model={roles}
-          key={roles.key}
         />
       </Container>
     )

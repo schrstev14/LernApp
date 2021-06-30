@@ -26,7 +26,7 @@ const CurrentCoursePage = () => {
   const course = useTracker(() => CourseCollection.findOne(id))
   const topics = useTracker(() => TopicCollection.find({ courseId: id }).map((topic) =>
 
-    <List.Item onClick={() => setCurrentTopic(topic)}>
+    <List.Item onClick={() => setCurrentTopic(topic)} key={topic._id}>
       <List.Content>
         <List.Header as='a' >{topic.title}</List.Header>
         <List.Description as='a'>{topic.description}</List.Description>

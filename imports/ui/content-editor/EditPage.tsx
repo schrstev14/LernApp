@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 
-import { Button, List, Loader} from 'semantic-ui-react'
+import { Button, ButtonGroup, List, Loader, Icon } from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
 import { editCourseId, Course, CourseCollection } from '/imports/api/CourseCollection'
 import TopicList from './TopicList'
@@ -20,7 +20,7 @@ const EditPage = () => {
     return !handle.ready()
   })
 
-  function remove(id){
+  function remove(id) {
     //@ts-ignore
     Meteor.callAsync('courseremove', id)
   }
@@ -30,11 +30,14 @@ const EditPage = () => {
     return (
 
       <List.Item key={course._id}>
-        <Button color={'green'} onClick={() => editCourseId.set('0')}>Course@+</Button>
+        <Button positive onClick={() => editCourseId.set('0')}>Course <Icon name='add' circular size='small'/></Button>
         <List.Content>
           <List.Content>
-            <Button floated='right' color={'red'} onClick={() => remove(course._id)}>{course.title}-Delete</Button>
-            <Button floated='right' primary onClick={() => editCourseId.set(course._id)}>{course.title}-Course@Edit</Button>
+            <ButtonGroup floated='right'>
+              <Button negative onClick={() => remove(course._id)}>{course.title} <Icon name='delete' circular size='small'/></Button>
+              
+              <Button primary onClick={() => editCourseId.set(course._id)}>{course.title} <Icon name='edit' circular size='small'/></Button>
+            </ButtonGroup >
           </List.Content>
           <List.Header>{course.title}</List.Header>
           <List.Description>{course.description}</List.Description>
@@ -52,7 +55,7 @@ const EditPage = () => {
     <div  >
       {Roles.userIsInRole(user, ['EDIT']) ? (
         <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
-          <div style={{ width: '35rem', marginRight: '10rem' }}>
+          <div style={{ width: '40rem', marginRight: '10rem' }}>
 
             <List divided verticalAlign='middle'>
               {courses}
