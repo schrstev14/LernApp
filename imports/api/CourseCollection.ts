@@ -2,8 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema'
 import { ReactiveVar } from 'meteor/reactive-var'
-import { ValidatedMethod } from 'meteor/mdg:validated-method';
-
 export interface Course {
     title: string
     description: string,

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 import { HTMLFieldProps, connectField, filterDOMProps } from 'uniforms';
 import AceEditor from 'react-ace'

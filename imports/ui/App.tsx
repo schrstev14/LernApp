@@ -10,7 +10,6 @@ import Header from '/imports/ui/Parts/Header'
 import EditPage from '/imports/ui/content-editor/EditPage'
 import UserManagement from '/imports/ui/UserManagement'
 
-import "semantic-ui-css/semantic.min.css"
 export const App = () => {
   
   return (

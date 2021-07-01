@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Loader } from 'semantic-ui-react'
@@ -9,19 +9,26 @@ import { List } from 'semantic-ui-react'
 import MarkdownDisplay from '/imports/ui/MarkdownDisplay'
 
 const CurrentCoursePage = () => {
-
   const { id } = useParams()
+  const user = useTracker(() => Meteor.user());
   const [currentTopic, setCurrentTopic] = useState<Topic | null>(null)
 
   const isLoadingTopics = useTracker(() => {
     const handle = Meteor.subscribe('Topics')
     return !handle.ready()
   })
-
   const isLoadingCourses = useTracker(() => {
     const handle = Meteor.subscribe('Courses')
     return !handle.ready()
   })
+
+  // const lastvist = useTracker(()=>CourseCollection.findOne(user?._id))
+  // useEffect(()=>
+  //  //@ts-ignore
+  // Meteor.callAsync('LastVisited.save', _id=lastvist?? 'undefined' ,courseid = id, userid=user?._id), 
+  // [id])
+ 
+  
 
   const course = useTracker(() => CourseCollection.findOne(id))
   const topics = useTracker(() => TopicCollection.find({ courseId: id }).map((topic) =>

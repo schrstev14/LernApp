@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import { useHistory } from 'react-router-dom'
-import { Item, Container, Progress, Loader } from 'semantic-ui-react'
+import { Item, Container, Loader } from 'semantic-ui-react'
 import { CourseCollection } from '../api/CourseCollection';
 
 const CoursePage = () => {
@@ -33,7 +33,7 @@ const CoursePage = () => {
   return (
     <div style={{ padding: '1rem', backgroundColor: 'pinkl'}} >
       <Container text>
-        <Item.Group>
+        <Item.Group divided>
           {courses}
         </Item.Group>
       </Container>

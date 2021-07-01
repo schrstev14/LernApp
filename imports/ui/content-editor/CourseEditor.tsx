@@ -1,7 +1,7 @@
 import React from 'react';
 import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
-import { Loader, Container } from 'semantic-ui-react'
+import { Loader, Container, Popup } from 'semantic-ui-react'
 import { SubmitField } from '/imports/ui/uniforms-react';
 import { editCourseId, CourseCollection } from '/imports/api/CourseCollection';
 import SimpleSchema from 'simpl-schema';
@@ -11,7 +11,12 @@ import MarkdownField from '/imports/ui/Parts/MarkdownField'
 
 const CustomSubmitField = () => (
   <div style={{ textAlign: 'center' }}>
-    <SubmitField value='Save' />
+    <Popup
+    content='Saved'
+    on='click'
+    pinned
+    trigger={<SubmitField value='Save' />}
+  />
   </div>
 )
 

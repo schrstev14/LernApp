@@ -1,3 +1,3 @@
 import './CourseCollection'
 import './TopicCollection'
-import './QuizCollection'
+import './LastVisitCollection'

@@ -3,8 +3,8 @@ import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 import SimpleSchema from 'simpl-schema';
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema-2';
-import { Button, Modal, List, Item, Loader, Checkbox, Container } from 'semantic-ui-react'
-import { AutoForm, RadioField, SubmitField } from '/imports/ui/uniforms-react';
+import { Container } from 'semantic-ui-react'
+import { AutoForm, RadioField } from '/imports/ui/uniforms-react';
 
 SimpleSchema.extendOptions(['uniforms']);
 
@@ -14,7 +14,7 @@ const manageSchema = new SimpleSchema({
     type: String,
     // @ts-ignore
     uniforms: {
-    disabled: true
+      disabled: true
     }
   },
   role: { type: Object },

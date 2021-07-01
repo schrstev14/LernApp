@@ -2,7 +2,7 @@ import React from 'react';
 import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import { editTopicId, TopicCollection } from '/imports/api/TopicCollection'
-import { Loader, Container } from 'semantic-ui-react'
+import { Loader, Container, Popup } from 'semantic-ui-react'
 import { SubmitField } from '/imports/ui/uniforms-react';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema-2';
@@ -11,19 +11,18 @@ import MarkdownField from '/imports/ui/Parts/MarkdownField'
 
 const CustomSubmitField = () => (
   <div style={{ textAlign: 'center' }}>
-    <SubmitField value='Save' />
+    <Popup
+    content='Saved'
+    on='click'
+    pinned
+    trigger={<SubmitField value='Save' />}
+    />
   </div>
 )
 
 SimpleSchema.extendOptions(['uniforms']);
 
 const InputSchemaTopic = new SimpleSchema({
-  courseId: {
-    type: String,
-    label: 'CourseID',
-    min: 5,
-    max: 25
-  },
   title: {
     type: String,
     min: 5,

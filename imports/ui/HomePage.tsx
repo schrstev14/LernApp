@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import { Button, Container } from 'semantic-ui-react'
-import { CourseCollection } from '../api/CourseCollection';
-import { useHistory, useLocation } from 'react-router-dom'
-
+import React from 'react';
+import { Button, Container, Icon } from 'semantic-ui-react'
+import { useHistory } from 'react-router-dom'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 
@@ -14,16 +12,17 @@ const HomePage = () => {
             {user ? (
                 <div>
                     <h1 style={{ textDecoration: 'underline' }}>Welcome "{user.username}"</h1>
-                    <h3>
-                        You have the Roles: {Roles.getRolesForUser(user)}
-                    </h3>
+                    <Container text>
+                        You have the Roles: {Roles.getRolesForUser(user).map((roles) => <>| {roles} |</>)}
+                    </Container>
                 </div>
+
             ) : (
                     <div>
                         <h1 style={{ textDecoration: 'underline' }} onClick={() => history.push('/login')}>Please LogIn to your Account or SignUp</h1>
                     </div>
                 )}
-            <Button onClick={() => history.push('/courses')}>Aktuelle Course</Button>
+            <Button circular onClick={() => history.push('/courses')}>Aktuelle Course<Icon name='arrow right'/></Button>
         </Container>
     )
 }
