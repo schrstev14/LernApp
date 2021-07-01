@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 
-import { Button, ButtonGroup, List, Loader, Icon } from 'semantic-ui-react'
+import { Button, ButtonGroup, List, Loader, Icon, Modal, Container } from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
 import { editCourseId, Course, CourseCollection } from '/imports/api/CourseCollection'
 import TopicList from './TopicList'
@@ -30,13 +30,21 @@ const EditPage = () => {
     return (
 
       <List.Item key={course._id}>
-        <Button positive onClick={() => editCourseId.set('0')}>Course <Icon name='add' circular size='small'/></Button>
+        {/* <Button positive onClick={() => editCourseId.set('0')}>Course <Icon name='add' circular size='small'/></Button> */}
+        <Modal
+          trigger={<Button positive onClick={() => editCourseId.set('0')}>Course <Icon name='add' circular size='small' /></Button>}
+          header={editCourseId.get() != '0' ? ('Edit Course') : ('New Course')}
+          content={<CourseEditor />}
+        />
         <List.Content>
           <List.Content>
             <ButtonGroup floated='right'>
-              <Button negative onClick={() => remove(course._id)}>{course.title} <Icon name='delete' circular size='small'/></Button>
-              
-              <Button primary onClick={() => editCourseId.set(course._id)}>{course.title} <Icon name='edit' circular size='small'/></Button>
+              <Button negative onClick={() => remove(course._id)}>{course.title} <Icon name='delete' circular size='small' /></Button>
+              <Modal
+                trigger={<Button primary onClick={() => editCourseId.set(course._id)}>{course.title} <Icon name='edit' circular size='small' /></Button>}
+                header={editCourseId.get() != '0' ? ('Edit Course') : ('New Course')}
+                content={<CourseEditor />}
+              />
             </ButtonGroup >
           </List.Content>
           <List.Header>{course.title}</List.Header>
@@ -54,14 +62,13 @@ const EditPage = () => {
   return (
     <div  >
       {Roles.userIsInRole(user, ['EDIT']) ? (
-        <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
-          <div style={{ width: '40rem', marginRight: '10rem' }}>
-
+        <Container text style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
+          <div style={{ width: '45rem' }}>
             <List divided verticalAlign='middle'>
               {courses}
             </List>
           </div>
-          <div>
+          {/* <div>
             <h1 style={{ textDecoration: 'underline' }}>
               CourseEditor
             </h1>
@@ -70,8 +77,8 @@ const EditPage = () => {
               TopicEditor
             </h1>
             <TopicEditor />
-          </div>
-        </div>
+          </div> */}
+        </Container>
       ) : (
           <div style={{ backgroundColor: 'red' }}>
             <h1>Not Allowed</h1>

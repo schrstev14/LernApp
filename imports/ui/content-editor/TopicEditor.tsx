@@ -51,13 +51,13 @@ const InputSchemaTopic = new SimpleSchema({
 
 const InputSchemaTopicBridge = new SimpleSchemaBridge(InputSchemaTopic);
 
-const TopicEditor = () => {
+const TopicEditor = ({ courseId }) => {
   const isLoading = useTracker(() => {
     const handle = Meteor.subscribe('Topics')
     return !handle.ready()
   })
 
-  const topic = useTracker(() => TopicCollection.findOne(editTopicId.get() ?? 'fnord'))
+  const topic = useTracker(() => editTopicId.get() != '0' ? (TopicCollection.findOne(editTopicId.get() ?? 'fnord')): ({courseId : courseId}))
 
   function onSave(newValue: string): void {
     //@ts-ignore
