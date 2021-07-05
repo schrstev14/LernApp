@@ -24,7 +24,7 @@ CourseCollection.attachSchema(CourseCollectionSchema)
 
 if (Meteor.isServer) {
     if (CourseCollection.find().count() == 0) {
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 15; i++) {
             CourseCollection.insert({
                 title: `Test${i}`,
                 description: `description${i}`,
@@ -32,7 +32,7 @@ if (Meteor.isServer) {
             })
         }
     }
-}
+};
 
 if (Meteor.isServer) {
     Meteor.publish('Courses', function publishCourses() {
@@ -40,7 +40,7 @@ if (Meteor.isServer) {
             CourseCollection.find()
         )
     })
-}
+};
 
 Meteor.methods({
     'courses.save'({ _id, title, description, imageURL }) {

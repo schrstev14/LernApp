@@ -23,11 +23,16 @@ const TopicList = ({ courseId }) => {
             <List.Content>
                 <List.Content>
                     <ButtonGroup floated='right'>
-                        <Button circular negative onClick={() => remove(topic._id)} icon> <Icon name='delete' circular size='small' /></Button>
+                        <Modal
+                            trigger={<Button circular negative icon> <Icon name='delete' circular size='small' /></Button>}
+                            header={'Notification'}
+                            content={'You really want to delete this'}
+                            actions={['Abbrechen', { key: 'done', content: 'Ja', positive: true, onClick: () => remove(topic._id) }]}
+                        />
                         <Modal
                             trigger={<Button circular primary onClick={() => editTopicId.set(topic._id)}><Icon name='edit' circular size='small' /></Button>}
                             header={editTopicId.get() != '0' ? ('Edit Topic') : ('New Topic')}
-                            content={<TopicEditor courseId={courseId}/>}
+                            content={<TopicEditor courseId={courseId} />}
                         />
                     </ButtonGroup>
                 </List.Content>
@@ -44,7 +49,7 @@ const TopicList = ({ courseId }) => {
             <Modal
                 trigger={<Button circular positive onClick={() => editTopicId.set('0')}>Topic <Icon name='add' circular size='small' /></Button>}
                 header={editTopicId.get() != '0' ? ('Edit Topic') : ('New Topic')}
-                content={<TopicEditor courseId={courseId}/>}
+                content={<TopicEditor courseId={courseId} />}
             />
 
             {topics}

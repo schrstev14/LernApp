@@ -28,17 +28,15 @@ const TopicCollectionSchema = new SimpleSchema({
 // @ts-ignore
 TopicCollection.attachSchema(TopicCollectionSchema)
 
-
-
 if (Meteor.isServer) {
     if (TopicCollection.find().count() == 0) {
         const course = useTracker(() => CourseCollection.find({}).map((course) => {
-            for (let i = 0; i < 5; i++) {
+            for (let i = 0; i < 3; i++) {
                 TopicCollection.insert({
                     courseId: course._id ?? 'fnord',
                     title: `Test${i}`,
                     description: `description${i}`,
-                    content: `test${i}`
+                    content: `# test${i}`
                 })
             }
         }))

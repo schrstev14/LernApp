@@ -38,7 +38,12 @@ const EditPage = () => {
         <List.Content>
           <List.Content>
             <ButtonGroup floated='right'>
-              <Button circular negative onClick={() => remove(course._id)}>{course.title} <Icon name='delete' circular size='small' /></Button>
+              <Modal
+                trigger={<Button circular negative >{course.title} <Icon name='delete' circular size='small' /></Button>}
+                header={'Notification'}
+                content={'You really want to delete this'}
+                actions={['Abbrechen', { key: 'done', content: 'Ja', positive: true, onClick:() => remove(course._id) }]}
+              />
               <Modal
                 trigger={<Button circular primary onClick={() => editCourseId.set(course._id)}>{course.title} <Icon name='edit' circular size='small' /></Button>}
                 header={editCourseId.get() != '0' ? ('Edit Course') : ('New Course')}
