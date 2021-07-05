@@ -1,12 +1,18 @@
 import { Mongo } from 'meteor/mongo';
+import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 import SimpleSchema from 'simpl-schema'
 
-export const LastVisitCollection = new Mongo.Collection('LastVisited');
+export interface LastVisit {
+    courseId: String,
+    userId: String | null
+}
+
+export const LastVisitCollection = new Mongo.Collection<LastVisit>('LastVisited');
 
 const LastVisitCollectionSchema = new SimpleSchema({
     courseId: String,
-    userId: String 
+    userId: String
 })
 
 // @ts-ignore
@@ -15,33 +21,37 @@ LastVisitCollection.attachSchema(LastVisitCollectionSchema)
 if (Meteor.isServer) {
     Meteor.publish('LastVisited', function publishLastVisited() {
         return (
-            LastVisitCollection.find({ userId: this.userId })
+            LastVisitCollection.find()
         )
     })
 }
 
-// Meteor.methods({
-//     'LastVisited.save'({ _id, courseId, userId }) {
-//         new SimpleSchema({
-//             _id: { type: String },
-//             courseId: { type: String, required: true },
-//             userId: { type: String, required: true },
-
-//         }, { requiredByDefault: false }).validate({ _id, courseId, userId });
-//         if (_id) {
-//             LastVisitCollection.update(_id, {
-//                 $set: {
-//                     courseId: courseId,
-//                     userId: userId
-//                 }
-//             })
-//         }
-//         else {
-//             LastVisitCollection.insert({
-//                 //@ts-ignore
-//                 courseId: courseId,
-//                 userId: userId
-//             });
-//         }
-//     }
-// });
+Meteor.methods({
+    'LastVisited.save'({courseId, userId }) {
+        new SimpleSchema({
+            courseId: { type: String, required: true },
+            userId: { type: String, required: true },
+            
+        }, { requiredByDefault: false }).validate({courseId, userId });
+        
+        if (Roles.userIsInRole(this.userId, ['User', 'Redakteur', 'Admin'])) {
+            var test = LastVisitCollection.findOne({ userId: this.userId })
+           
+            if (test == undefined) {
+                LastVisitCollection.insert({
+                    courseId: courseId,
+                    userId: userId
+                });
+            } else {
+                LastVisitCollection.update(test._id, {
+                    $set: {
+                        courseId: courseId,
+                        userId: userId
+                    }
+                })
+            }
+        } else {
+            throw new Meteor.Error('No Account', 'You have no Account');
+        }
+    }
+});

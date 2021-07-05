@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { Meteor } from 'meteor/meteor'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Loader } from 'semantic-ui-react'
-import { useParams } from 'react-router-dom'
+import { useParams, useHistory } from 'react-router-dom'
 import { CourseCollection } from '/imports/api/CourseCollection';
 import { Topic, TopicCollection } from '/imports/api/TopicCollection';
-import { List } from 'semantic-ui-react'
+import { List, Button, Icon } from 'semantic-ui-react'
 import MarkdownDisplay from '/imports/ui/MarkdownDisplay'
 
 const CurrentCoursePage = () => {
   const { id } = useParams()
+  const history = useHistory();
   const user = useTracker(() => Meteor.user());
   const [currentTopic, setCurrentTopic] = useState<Topic | null>(null)
 
@@ -22,16 +23,14 @@ const CurrentCoursePage = () => {
     return !handle.ready()
   })
 
-  // const lastvist = useTracker(()=>CourseCollection.findOne(user?._id))
-  // useEffect(()=>
-  //  //@ts-ignore
-  // Meteor.callAsync('LastVisited.save', _id=lastvist?? 'undefined' ,courseid = id, userid=user?._id), 
-  // [id])
- 
-  
+  useEffect(() =>
+    //@ts-ignore
+    user ? (
+      Meteor.call('LastVisited.save', { courseId: id, userId: user?._id })) : (console.log())
+    , [id])
 
   const course = useTracker(() => CourseCollection.findOne(id))
-  const topics = useTracker(() => TopicCollection.find({ courseId: id }).map((topic) =>
+  const topics = useTracker(() => TopicCollection.find({ courseId: course?._id }).map((topic) =>
 
     <List.Item onClick={() => setCurrentTopic(topic)} key={topic._id}>
       <List.Content>
@@ -39,7 +38,6 @@ const CurrentCoursePage = () => {
         <List.Description as='a'>{topic.description}</List.Description>
       </List.Content>
     </List.Item>
-
   ))
   if (isLoadingTopics || isLoadingCourses) { return <div><Loader>Loading</Loader></div> }
 
@@ -49,6 +47,7 @@ const CurrentCoursePage = () => {
     <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }} >
       {/* Menu */}
       <div style={{ width: '10rem', marginRight: '2rem' }}>
+      <Button circular onClick={() => history.push('/courses')} icon><Icon name='arrow left' /> Back to All Course </Button>
         <List divided relaxed> {topics} </List>
       </div>
       {/* Content */}
