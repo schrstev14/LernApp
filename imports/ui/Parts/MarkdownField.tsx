@@ -27,7 +27,6 @@ function UnMk({
 
   return (
     <div className={classnames(className, { disabled, error, required, value }, 'field')} {...filterDOMProps(props)} ref={ref}>
-      {/* <pre>{JSON.stringify(value, null, 2)}</pre> */}
       {label && <label htmlFor={id}>{label}</label>}
       {/* CHECK */}
       <AceEditor mode="markdown" theme="chrome" width={width} height={200} value={value} onChange={(newValue) => onChange(newValue)} setOptions={{

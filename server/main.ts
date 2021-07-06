@@ -64,8 +64,8 @@ Meteor.methods({
   'newuserrole'(user) {
     new SimpleSchema({
       user: { type: String }
-    }).validate({ user});
-    Roles.addUsersToRoles ( user,  ['User'] )
+    }).validate({ user });
+    Roles.addUsersToRoles(user, ['User'])
     Roles.setUserRoles(user, ['User'])
   }
 });

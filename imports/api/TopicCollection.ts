@@ -22,7 +22,6 @@ const TopicCollectionSchema = new SimpleSchema({
     title: String,
     description: String,
     content: String
-    // quizId: String
 })
 
 // @ts-ignore
@@ -97,6 +96,22 @@ Meteor.methods({
         } else {
             throw new Meteor.Error('No Permission', 'You have no Permission to do that');
         }
-
     }
 });
+
+Meteor.methods({
+    'course.topicremove'(id) {
+        new SimpleSchema({
+            id: { type: String }
+        }).validate({ id });
+        if (Roles.userIsInRole(this.userId, ['EDIT'])) {
+            TopicCollection?.find({ courseId: id }).map((topic) =>
+                //@ts-ignore
+                Meteor.callAsync('topicremove', topic._id)
+            )
+        } else {
+            throw new Meteor.Error('No Permission', 'You have no Permission to do that');
+        }
+    }
+});
+

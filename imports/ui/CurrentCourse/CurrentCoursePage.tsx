@@ -24,7 +24,6 @@ const CurrentCoursePage = () => {
   })
 
   useEffect(() =>
-    //@ts-ignore
     user ? (
       Meteor.call('LastVisited.save', { courseId: id, userId: user?._id })) : (console.log())
     , [id])
@@ -42,15 +41,11 @@ const CurrentCoursePage = () => {
   if (isLoadingTopics || isLoadingCourses) { return <div><Loader>Loading</Loader></div> }
 
   return (
-
-
     <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }} >
-      {/* Menu */}
       <div style={{ width: '10rem', marginRight: '2rem' }}>
-      <Button circular onClick={() => history.push('/courses')} icon><Icon name='arrow left' /> Back to All Course </Button>
+        <Button circular onClick={() => history.push('/courses')} icon><Icon name='arrow left' /> Back to All Course </Button>
         <List divided relaxed> {topics} </List>
       </div>
-      {/* Content */}
       <div>
         <MarkdownDisplay markdown={currentTopic?.content} style={{ color: 'black' }} contentClass="fnord" />
       </div>

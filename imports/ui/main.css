@@ -1,8 +1,25 @@
 html, body {
   font-family: sans-serif;
+  font-size: 105%;
   height: 100%;
 }
 
 .ui.menu{
   margin: 0;
+  height: 2rem;
+}
+
+.ui.circular.button {
+  border-radius: 10em;
+}
+
+.ui.circular.negative.button {
+  border-radius: 10em;
+}
+
+.ui.circular.primary.button {
+  border-radius: 10em;
+}
+.ui.secondary.pointing.menu .item:hover{
+transform: scale(1.25, 1.25);
 }

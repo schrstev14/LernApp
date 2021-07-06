@@ -8,8 +8,6 @@ import { editCourseId, CourseCollection } from '/imports/api/CourseCollection'
 import TopicList from './TopicList'
 import CourseEditor from './CourseEditor'
 
-//verschachtelte Listen + buttons (+ | edit) -> semantic ui model, 
-
 const EditPage = () => {
   const user = useTracker(() => Meteor.user());
 
@@ -29,7 +27,6 @@ const EditPage = () => {
     return (
 
       <List.Item key={course._id}>
-        {/* <Button positive onClick={() => editCourseId.set('0')}>Course <Icon name='add' circular size='small'/></Button> */}
         <Modal
           trigger={<Button circular positive onClick={() => editCourseId.set('0')}>Course <Icon name='add' circular size='small' /></Button>}
           header={editCourseId.get() != '0' ? ('Edit Course') : ('New Course')}
@@ -39,7 +36,7 @@ const EditPage = () => {
           <List.Content>
             <ButtonGroup floated='right'>
               <Modal
-                trigger={<Button circular negative >{course.title} <Icon name='delete' circular size='small' /></Button>}
+                trigger={<Button circular negative>{course.title} <Icon name='delete' circular size='small' /></Button>}
                 header={'Notification'}
                 content={'You really want to delete this'}
                 actions={['Abbrechen', { key: 'done', content: 'Ja', positive: true, onClick:() => remove(course._id) }]}
@@ -61,14 +58,14 @@ const EditPage = () => {
         </List.Content>
       </List.Item>
     )
-
   }))
+  
   return (
     <div  >
       {Roles.userIsInRole(user, ['EDIT']) ? (
         <Container text style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
           <div style={{ width: '45rem' }}>
-            <List divided verticalAlign='middle'>
+           <List divided verticalAlign='middle' >  {/* style={{borderStyle: 'solid', borderWidth:'2px', padding:'0.5rem', borderRadius: '3px'}} */}
               {courses}
             </List>
           </div>

@@ -45,7 +45,6 @@ const UserManagement = () => {
       <Container key={roles._id} text style={{ border: 'solid', borderWidth: '2px', borderCollapse: 'collapse', padding: '1rem' }}>
         <AutoForm
           schema={manageSchemaBridge}
-          //onChange={RoleChange}
           onSubmit={RoleChange}
           model={roles}
         />
@@ -61,10 +60,10 @@ const UserManagement = () => {
           </div>
         </div>
       ) : (
-          <div style={{ backgroundColor: 'red' }}>
-            <h1>Not Allowed</h1>
-          </div>
-        )}
+        <div style={{ backgroundColor: 'red' }}>
+          <h1>Not Allowed</h1>
+        </div>
+      )}
     </div>
   )
 }
