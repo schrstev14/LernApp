@@ -27,7 +27,7 @@ const TopicList = ({ courseId }) => {
                             trigger={<Button circular negative icon> <Icon name='delete' circular size='small' /></Button>}
                             header={'Warning'}
                             content={'You really want to delete this ?'}
-                            actions={['Abbrechen', { key: 'done', content: 'Ja', positive: true, onClick: () => remove(topic._id) }]}
+                            actions={['abort', { key: 'done', content: 'Yes', positive: true, onClick: () => remove(topic._id) }]}
                         />
                         <Modal
                             trigger={<Button circular primary onClick={() => editTopicId.set(topic._id)} icon> <Icon name='edit' circular size='small' /></Button>}

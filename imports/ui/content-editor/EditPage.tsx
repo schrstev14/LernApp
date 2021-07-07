@@ -2,7 +2,7 @@ import React from 'react'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 
-import { Button, ButtonGroup, List, Loader, Icon, Modal, Container } from 'semantic-ui-react'
+import { Button, ButtonGroup, List, Loader, Icon, Modal, Container, Message } from 'semantic-ui-react'
 import { useParams } from 'react-router-dom'
 import { editCourseId, CourseCollection } from '/imports/api/CourseCollection'
 import TopicList from './TopicList'
@@ -39,7 +39,7 @@ const EditPage = () => {
                 trigger={<Button circular negative>{course.title} <Icon name='delete' circular size='small' /></Button>}
                 header={'Notification'}
                 content={'You really want to delete this'}
-                actions={['Abbrechen', { key: 'done', content: 'Ja', positive: true, onClick:() => remove(course._id) }]}
+                actions={['abort', { key: 'done', content: 'Yes', positive: true, onClick: () => remove(course._id) }]}
               />
               <Modal
                 trigger={<Button circular primary onClick={() => editCourseId.set(course._id)}>{course.title} <Icon name='edit' circular size='small' /></Button>}
@@ -59,22 +59,27 @@ const EditPage = () => {
       </List.Item>
     )
   }))
-  
+
   return (
     <div  >
       {Roles.userIsInRole(user, ['EDIT']) ? (
         <Container text style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
           <div style={{ width: '45rem' }}>
-           <List divided verticalAlign='middle' >  {/* style={{borderStyle: 'solid', borderWidth:'2px', padding:'0.5rem', borderRadius: '3px'}} */}
+            <List divided verticalAlign='middle' >  {/* style={{borderStyle: 'solid', borderWidth:'2px', padding:'0.5rem', borderRadius: '3px'}} */}
               {courses}
             </List>
           </div>
         </Container>
       ) : (
-          <div style={{ backgroundColor: 'red' }}>
-            <h1>Not Allowed</h1>
-          </div>
-        )}
+        <div style={{ backgroundColor: 'red', textAlign: 'center'}}>
+          <Message
+            icon='delete'
+            header='Not Allowed'
+            content='You dont have the Permission to do something'
+          />
+          <h1>Nothing for you</h1>
+        </div>
+      )}
     </div>
   )
 }

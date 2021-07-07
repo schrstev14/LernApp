@@ -2,7 +2,6 @@ import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 import SimpleSchema from 'simpl-schema'
 import { ReactiveVar } from 'meteor/reactive-var'
-import { TopicCollection } from './TopicCollection';
 export interface Course {
     title: string
     description: string,
@@ -80,8 +79,7 @@ Meteor.methods({
         }).validate({ id });
         if (Roles.userIsInRole(this.userId, ['EDIT'])) {
             CourseCollection.remove(id)
-            //@ts-ignore
-            Meteor.callAsync('course.topicremove', id)
+            Meteor.call('course.topicremove', id)
         } else {
             throw new Meteor.Error('No Permission', 'You have no Permission to do that');
         }

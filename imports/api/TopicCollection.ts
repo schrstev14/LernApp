@@ -106,8 +106,7 @@ Meteor.methods({
         }).validate({ id });
         if (Roles.userIsInRole(this.userId, ['EDIT'])) {
             TopicCollection?.find({ courseId: id }).map((topic) =>
-                //@ts-ignore
-                Meteor.callAsync('topicremove', topic._id)
+                Meteor.call('topicremove', topic._id)
             )
         } else {
             throw new Meteor.Error('No Permission', 'You have no Permission to do that');

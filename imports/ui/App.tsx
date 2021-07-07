@@ -15,7 +15,7 @@ export const App = () => {
   return (
     <Router>
       <Header />
-      <div style={{ flexGrow: 1, backgroundColor: '#A0FFEF', overflowY: 'auto', paddingTop: '1rem', paddingBottom: '1rem' }}>
+      <div style={{ flexGrow: 1, backgroundColor: '#A0FFFF', overflowY: 'auto', paddingTop: '1rem', paddingBottom: '1rem' }}>
         <Switch>
           <Route path="/courses">
             <CoursesPage />

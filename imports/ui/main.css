@@ -3,7 +3,6 @@ html, body {
   font-size: 105%;
   height: 100%;
 }
-
 .ui.menu{
   margin: 0;
   height: 2rem;
@@ -20,6 +19,10 @@ html, body {
 .ui.circular.primary.button {
   border-radius: 10em;
 }
-.ui.secondary.pointing.menu .item:hover{
-transform: scale(1.25, 1.25);
+.ui.tabular.menu .item:hover{
+transform: scale(1.1, 1.1);
+}
+
+.Course:hover{
+  transform: scale(1.1, 1.1);
 }

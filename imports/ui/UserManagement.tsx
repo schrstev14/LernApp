@@ -3,7 +3,7 @@ import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 import SimpleSchema from 'simpl-schema';
 import SimpleSchemaBridge from 'uniforms-bridge-simple-schema-2';
-import { Container } from 'semantic-ui-react'
+import { Container, Message } from 'semantic-ui-react'
 import { AutoForm, RadioField } from '/imports/ui/uniforms-react';
 
 SimpleSchema.extendOptions(['uniforms']);
@@ -41,8 +41,10 @@ function RoleChange(newValue: String): void {
 const UserManagement = () => {
   const user = useTracker(() => Meteor.user());
   const UserRoles = useTracker(() => Meteor.roleAssignment.find({}).map((roles) => {
+    const Username = Meteor.users.find(roles?.user?._id).map((name) => <h3>Username: "{name.username}"</h3>)
     return (
-      <Container key={roles._id} text style={{ border: 'solid', borderWidth: '2px', borderCollapse: 'collapse', padding: '1rem' }}>
+      <Container key={roles._id} text style={{ borderBottom: 'solid', borderWidth: '2.5px', padding: '1rem' }}>
+        {Username}
         <AutoForm
           schema={manageSchemaBridge}
           onSubmit={RoleChange}
@@ -55,13 +57,19 @@ const UserManagement = () => {
     <div style={{ padding: '1rem' }} >
       {Roles.userIsInRole(user, ['Admin']) ? (
         <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
-          <div>
+          <Container text>
+            <h1 style={{ textDecoration: 'underline' }}>User Managment</h1>
             {UserRoles}
-          </div>
+          </Container>
         </div>
       ) : (
-        <div style={{ backgroundColor: 'red' }}>
-          <h1>Not Allowed</h1>
+        <div style={{ backgroundColor: 'red', textAlign: 'center' }}>
+          <Message
+            icon='delete'
+            header='Not Allowed'
+            content='You dont have the Permission to do something'
+          />
+          <h1>Nothing for you</h1>
         </div>
       )}
     </div>

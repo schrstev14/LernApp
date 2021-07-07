@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Button, Container, Icon, Loader, Item } from 'semantic-ui-react'
+import { Button, Container, Icon, Loader, Item, List } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
@@ -23,15 +23,15 @@ const HomePage = () => {
 
     const course = useTracker(() => CourseCollection.find(LastVisited?.courseId).map((course) => {
         return (
-            <Item key={course._id} onClick={() => history.push(`/current-course/${course._id}`)}>
-                <Item.Image size='tiny' src={course.imageURL} />
-                <Item.Content>
-                    <Item.Header as='a'>{course.title}</Item.Header>
-                    <Item.Description>
-                        {course.description}
-                    </Item.Description>
-                </Item.Content>
-            </Item>
+                <Item key={course._id} onClick={() => history.push(`/current-course/${course._id}`)}>
+                    <Item.Image size='tiny' src={course.imageURL} />
+                    <Item.Content>
+                        <Item.Header as='a'>{course.title}</Item.Header>
+                        <Item.Description>
+                            {course.description}
+                        </Item.Description>
+                    </Item.Content>
+                </Item>
         )
     }
     ))
@@ -43,10 +43,16 @@ const HomePage = () => {
                 {user ? (
                     <div>
                         <h1 style={{ textDecoration: 'underline' }}>Welcome "{user.username}"</h1>
-                        <Container text>
+                        <h3>
                             You have the Roles: {Roles.getRolesForUser(user).map((roles) => <>| {roles} |</>)}
-                        </Container>
-                        {course.length != 0 ? (<h3>Zuletzt Besuchter Course:{course}</h3>) : ('Kein letzter Course')}
+                        </h3>
+                        {course.length != 0 ? (
+                        <div>
+                            <br/>
+                            <h3>Last visited Course:</h3>
+                            <h3 className='Course'>{course}</h3>
+                        </div>
+                        ) : ('Kein letzter Course')}
                     </div>
                 ) : (
                     <div>
@@ -55,7 +61,8 @@ const HomePage = () => {
                     </div>
                 )}
             </Fragment>
-            <Button circular onClick={() => history.push('/courses')}>Alle Course<Icon name='arrow right' /></Button>
+            <br />
+            <Button positive circular onClick={() => history.push('/courses')}>Alle Course<Icon name='arrow right' /></Button>
         </Container>
     )
 }

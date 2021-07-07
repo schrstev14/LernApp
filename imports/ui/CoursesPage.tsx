@@ -14,7 +14,7 @@ const CoursePage = () => {
 
   const courses = useTracker(() => CourseCollection.find().map((course) => {
     return (
-      <Item key={course._id} onClick={() => history.push(`/current-course/${course._id}`)}>
+      <Item key={course._id} onClick={() => history.push(`/current-course/${course._id}`)} className='Course'>
         <Item.Image size='tiny' src={course.imageURL} />
         <Item.Content>
           <Item.Header as='a'>{course.title}</Item.Header>
@@ -30,8 +30,9 @@ const CoursePage = () => {
 
   if (isLoading) { return <div><Loader>Loading</Loader></div> }
   return (
-    <div style={{ padding: '1rem', backgroundColor: 'pinkl' }} >
+    <div style={{ padding: '1rem'}} >
       <Container text>
+        <h1 style={{textDecoration: 'underline'}}>Choose a Course to learn:</h1>
         <Item.Group divided>
           {courses}
         </Item.Group>

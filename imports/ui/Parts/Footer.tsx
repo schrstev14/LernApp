@@ -1,5 +1,6 @@
 import React from 'react';
-import { Menu, Image, Icon } from 'semantic-ui-react'
+import { Menu, Image} from 'semantic-ui-react'
+
 
 const Footer = () => {
   return (
