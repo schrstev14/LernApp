@@ -41,7 +41,7 @@ function RoleChange(newValue: String): void {
 const UserManagement = () => {
   const user = useTracker(() => Meteor.user());
   const UserRoles = useTracker(() => Meteor.roleAssignment.find({}).map((roles) => {
-    const Username = Meteor.users.find(roles?.user?._id).map((name) => <h3>Username: "{name.username}"</h3>)
+    const Username = Meteor.users.find(roles?.user?._id).map((name) => <h3>Username: {name.username}</h3>)
     return (
       <Container key={roles._id} text style={{ borderBottom: 'solid', borderWidth: '2.5px', padding: '1rem' }}>
         {Username}
@@ -65,11 +65,12 @@ const UserManagement = () => {
       ) : (
         <div style={{ backgroundColor: 'red', textAlign: 'center' }}>
           <Message
+            negative
             icon='delete'
             header='Not Allowed'
             content='You dont have the Permission to do something'
           />
-          <h1>Nothing for you</h1>
+          <h1>Here is Nothing for you</h1>
         </div>
       )}
     </div>

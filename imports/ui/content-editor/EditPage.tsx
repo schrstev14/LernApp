@@ -26,20 +26,20 @@ const EditPage = () => {
     if (isLoading) { return <div><Loader>Loading</Loader></div> }
     return (
 
-      <List.Item key={course._id}>
+      <List.Item key={course._id} style={{ paddingTop: '1em', paddingBottom: '1em' }}>
         <Modal
           trigger={<Button circular positive onClick={() => editCourseId.set('0')}>Course <Icon name='add' circular size='small' /></Button>}
           header={editCourseId.get() != '0' ? ('Edit Course') : ('New Course')}
           content={<CourseEditor />}
         />
-        <List.Content>
+        <List.Content style={{ paddingTop: '0.75em', paddingBottom: '0.5em' }}>
           <List.Content>
             <ButtonGroup floated='right'>
               <Modal
                 trigger={<Button circular negative>{course.title} <Icon name='delete' circular size='small' /></Button>}
                 header={'Notification'}
                 content={'You really want to delete this'}
-                actions={['abort', { key: 'done', content: 'Yes', positive: true, onClick: () => remove(course._id) }]}
+                actions={[{key:'not', content:'abort', negative: true}, { key: 'done', content: 'Yes', positive: true, onClick: () => remove(course._id) }]}
               />
               <Modal
                 trigger={<Button circular primary onClick={() => editCourseId.set(course._id)}>{course.title} <Icon name='edit' circular size='small' /></Button>}
@@ -71,13 +71,14 @@ const EditPage = () => {
           </div>
         </Container>
       ) : (
-        <div style={{ backgroundColor: 'red', textAlign: 'center'}}>
+        <div style={{ backgroundColor: 'red', textAlign: 'center' }}>
           <Message
+            negative
             icon='delete'
             header='Not Allowed'
             content='You dont have the Permission to do something'
           />
-          <h1>Nothing for you</h1>
+          <h1>Here is Nothing for you</h1>
         </div>
       )}
     </div>

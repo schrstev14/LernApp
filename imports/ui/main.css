@@ -10,14 +10,17 @@ html, body {
 
 .ui.circular.button {
   border-radius: 10em;
+  text-align: center;
 }
 
 .ui.circular.negative.button {
   border-radius: 10em;
+  text-align: center;
 }
 
 .ui.circular.primary.button {
   border-radius: 10em;
+  text-align: center;
 }
 .ui.tabular.menu .item:hover{
 transform: scale(1.1, 1.1);
@@ -25,4 +28,13 @@ transform: scale(1.1, 1.1);
 
 .Course:hover{
   transform: scale(1.1, 1.1);
+  cursor: pointer;
+}
+
+.main{
+  background-image: linear-gradient(to bottom, #44dada, #c9fafa)
+}
+
+.ui.tabular.menu .active.item{
+  background-color: #44dada;
 }

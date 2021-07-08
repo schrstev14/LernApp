@@ -21,7 +21,6 @@ const CoursePage = () => {
           <Item.Description>
             {course.description}
           </Item.Description>
-          {/* <Item.Extra><Progress value='0' total='5' progress='percent' /></Item.Extra> */}
         </Item.Content>
       </Item>
     )

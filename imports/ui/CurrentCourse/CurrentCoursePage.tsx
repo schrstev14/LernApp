@@ -31,7 +31,7 @@ const CurrentCoursePage = () => {
   const course = useTracker(() => CourseCollection.findOne(id))
   const topics = useTracker(() => TopicCollection.find({ courseId: course?._id }).map((topic) =>
 
-    <List.Item onClick={() => setCurrentTopic(topic)} key={topic._id}>
+    <List.Item onClick={() => setCurrentTopic(topic)} key={topic._id} style={{paddingTop: '1rem', paddingBottom: '1rem'}}>
       <List.Content>
         <List.Header as='a' >{topic.title}</List.Header>
         <List.Description as='a'>{topic.description}</List.Description>
@@ -42,14 +42,13 @@ const CurrentCoursePage = () => {
 
   return (
     <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }} >
-      <div style={{ width: '10rem', marginRight: '2rem' }}>
-        <Button circular onClick={() => history.push('/courses')} icon><Icon name='arrow left' /> Back to All Course </Button>
+      <div style={{ width: '17rem', marginRight: '2rem' }}>
+        <Button circular negative onClick={() => history.push('/courses')} icon><Icon name='arrow left' /> Back to All Courses </Button>
         <List divided relaxed> {topics} </List>
       </div>
       <div>
         <MarkdownDisplay markdown={currentTopic?.content} style={{ color: 'black' }} contentClass="fnord" />
       </div>
-
     </div>
   )
 }

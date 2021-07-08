@@ -23,6 +23,13 @@ const Header = () => {
   }
   const Delay = 1500;
 
+  const loggin = <Menu.Item
+    name={user ? ('Logout') : ('Login')}
+    icon={user ? ('sign out') : ('sign in')}
+    active={location.pathname === '/login'}
+    onClick={user ? (console.log) : (() => history.push('/login'))}
+  />
+
   return (
     <Menu tabular>
       <Popup content='HomePage' trigger={<Menu.Item
@@ -32,7 +39,8 @@ const Header = () => {
         onClick={() => history.push('/')}
       />}
         mouseEnterDelay={Delay}
-        style={style} />
+        style={style}
+        on='hover' />
 
       <Popup content='All Courses' trigger={
         <Menu.Item
@@ -42,7 +50,8 @@ const Header = () => {
           onClick={() => history.push('/courses')}
         />}
         mouseEnterDelay={Delay}
-        style={style} />
+        style={style}
+        on='hover' />
 
       {Roles.userIsInRole(user, ['EDIT']) ? (
         <Popup content='EditPage' trigger={
@@ -53,7 +62,8 @@ const Header = () => {
             onClick={() => history.push('/edit-page')}
           />}
           mouseEnterDelay={Delay}
-          style={style} />) : ('')
+          style={style}
+          on='hover' />) : ('')
       }
       {Roles.userIsInRole(user, ['Admin']) ? (
         <Popup content='User Managment System' trigger={
@@ -64,29 +74,21 @@ const Header = () => {
             onClick={() => history.push('/user-management')}
           />}
           mouseEnterDelay={Delay}
-          style={style} />) : ('')
+          style={style}
+          on='hover' />) : ('')
 
       }
       <Menu.Menu position='right'>
-        <Menu.Item
-          name={user ? ('logout') : ('Login')}
-          icon={user ? ('sign out') : ('sign in')}
-          active={location.pathname === '/login'}
-          onClick={() => logout()}
-        />
-        {/* <Modal
-          trigger={
-            <Menu.Item
-              name={user ? ('logout') : ('Login')}
-              icon={user ? ('sign out') : ('sign in')}
-              active={location.pathname === '/login'}
-            />}
-          header={'Warning !'}
-          content={'You will be logged out'}
-          actions={['abort', { key: 'done', content: 'Yes', positive: true, onClick: () => logout() }]}
-        /> */}
-
-
+        {user ?
+          (
+            <Modal
+              trigger={loggin}
+              header={'Warning !'}
+              content={'You will be logged out'}
+              actions={[{key:'not', content:'abort', negative: true}, { key: 'done', content: 'Yes', positive: true, onClick: () => logout() }]}
+            />)
+          : (loggin)
+        }
       </Menu.Menu>
     </Menu>
   )

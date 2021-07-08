@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import { Button, Container, Icon, Loader, Item, List } from 'semantic-ui-react'
+import { Button, Container, Icon, Loader, Item, Label, Popup } from 'semantic-ui-react'
 import { useHistory } from 'react-router-dom'
 import { useTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
@@ -42,9 +42,9 @@ const HomePage = () => {
             <Fragment>
                 {user ? (
                     <div>
-                        <h1 style={{ textDecoration: 'underline' }}>Welcome "{user.username}"</h1>
+                        <h1 style={{ textDecoration: 'underline' }}>Welcome {user.username}</h1>
                         <h3>
-                            You have the Roles: {Roles.getRolesForUser(user).map((roles) => <>| {roles} |</>)}
+                            You have the Roles: <br/>{Roles.getRolesForUser(user).map((roles) => <Label color='black' style={{fontSize: '95%'}}> {roles} </Label>)}
                         </h3>
                         {course.length != 0 ? (
                         <div>
@@ -62,8 +62,10 @@ const HomePage = () => {
                 )}
             </Fragment>
             <br />
-            <Button positive circular onClick={() => history.push('/courses')}>Alle Course<Icon name='arrow right' /></Button>
-        </Container>
+            <Popup content='Go To All Courses' trigger={
+            <Button positive circular onClick={() => history.push('/courses')}>All Courses<Icon name='arrow right' /></Button>
+            }/>
+       </Container>
     )
 }
 
