@@ -29,10 +29,10 @@ const CoursePage = () => {
 
   if (isLoading) { return <div><Loader>Loading</Loader></div> }
   return (
-    <div style={{ padding: '1rem'}} >
+    <div style={{ padding: '1rem' }} >
       <Container text>
-        <h1 style={{textDecoration: 'underline'}}>Choose a Course to learn:</h1>
-        <Item.Group divided>
+        <h1 className='Title'>Choose a Course to learn:</h1>
+        <Item.Group divided >
           {courses}
         </Item.Group>
       </Container>

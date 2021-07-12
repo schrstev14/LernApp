@@ -23,9 +23,7 @@ const EditPage = () => {
   }
 
   const courses = useTracker(() => CourseCollection.find({}).map((course) => {
-    if (isLoading) { return <div><Loader>Loading</Loader></div> }
     return (
-
       <List.Item key={course._id} style={{ paddingTop: '1em', paddingBottom: '1em' }}>
         <Modal
           trigger={<Button circular positive onClick={() => editCourseId.set('0')}>Course <Icon name='add' circular size='small' /></Button>}
@@ -37,9 +35,9 @@ const EditPage = () => {
             <ButtonGroup floated='right'>
               <Modal
                 trigger={<Button circular negative>{course.title} <Icon name='delete' circular size='small' /></Button>}
-                header={'Notification'}
-                content={'You really want to delete this'}
-                actions={[{key:'not', content:'abort', negative: true}, { key: 'done', content: 'Yes', positive: true, onClick: () => remove(course._id) }]}
+                header={'Warning'}
+                content={'You really want to delete this ?'}
+                actions={[{ key: 'not', content: 'abort', negative: true }, { key: 'done', content: 'Yes', positive: true, onClick: () => remove(course._id) }]}
               />
               <Modal
                 trigger={<Button circular primary onClick={() => editCourseId.set(course._id)}>{course.title} <Icon name='edit' circular size='small' /></Button>}
@@ -59,21 +57,23 @@ const EditPage = () => {
       </List.Item>
     )
   }))
-
+  if (isLoading) { return <div><Loader>Loading</Loader></div> }
   return (
     <div  >
       {Roles.userIsInRole(user, ['EDIT']) ? (
         <Container text style={{ flexGrow: 1, padding: '1rem', display: 'flex' }}>
           <div style={{ width: '45rem' }}>
             <List divided verticalAlign='middle' >  {/* style={{borderStyle: 'solid', borderWidth:'2px', padding:'0.5rem', borderRadius: '3px'}} */}
+              <h1 className='Title'>Edit Page</h1>
               {courses}
             </List>
           </div>
         </Container>
       ) : (
-        <div style={{ backgroundColor: 'red', textAlign: 'center' }}>
+        <div style={{ textAlign: 'center' }}>
           <Message
             negative
+            color='red'
             icon='delete'
             header='Not Allowed'
             content='You dont have the Permission to do something'

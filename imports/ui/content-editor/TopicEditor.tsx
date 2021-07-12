@@ -12,10 +12,10 @@ import MarkdownField from '/imports/ui/Parts/MarkdownField'
 const CustomSubmitField = () => (
   <div style={{ textAlign: 'center' }}>
     <Popup
-    content='Saved'
-    on='click'
-    pinned
-    trigger={<SubmitField value='Save' />}
+      content='Saved'
+      on='click'
+      pinned
+      trigger={<SubmitField value='Save' />}
     />
   </div>
 )
@@ -56,7 +56,7 @@ const TopicEditor = ({ courseId }) => {
     return !handle.ready()
   })
 
-  const topic = useTracker(() => editTopicId.get() != '0' ? (TopicCollection.findOne(editTopicId.get() ?? 'fnord')): ({courseId : courseId}))
+  const topic = useTracker(() => editTopicId.get() != '0' ? (TopicCollection.findOne(editTopicId.get() ?? 'fnord')) : ({ courseId: courseId }))
 
   function onSave(newValue: string): void {
     //@ts-ignore
@@ -67,7 +67,7 @@ const TopicEditor = ({ courseId }) => {
   return (
     <div style={{ padding: '1rem' }} >
       <Container text>
-        <AutoForm schema={InputSchemaTopicBridge} onSubmit={onSave} model={topic} submitField={CustomSubmitField}/>
+        <AutoForm schema={InputSchemaTopicBridge} onSubmit={onSave} model={topic} submitField={CustomSubmitField} />
       </Container>
     </div>
   )

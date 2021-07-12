@@ -19,7 +19,7 @@ const TopicList = ({ courseId }) => {
     }
     const topics = useTracker(() => TopicCollection.find({ courseId }).map((topic) =>
 
-        <List.Item style={{ padding: '1em',paddingBottom: '1rem', paddingTop: '1rem' }} key={topic._id}>
+        <List.Item style={{ padding: '1em', paddingBottom: '1rem', paddingTop: '1rem' }} key={topic._id}>
             <List.Content>
                 <List.Content>
                     <ButtonGroup floated='right'>
@@ -27,7 +27,7 @@ const TopicList = ({ courseId }) => {
                             trigger={<Button circular negative icon> <Icon name='delete' circular size='small' /></Button>}
                             header={'Warning'}
                             content={'You really want to delete this ?'}
-                            actions={[{key:'not', content:'abort', negative: true}, { key: 'done', content: 'Yes', positive: true, onClick: () => remove(topic._id) }]}
+                            actions={[{ key: 'not', content: 'abort', negative: true }, { key: 'done', content: 'Yes', positive: true, onClick: () => remove(topic._id) }]}
                         />
                         <Modal
                             trigger={<Button circular primary onClick={() => editTopicId.set(topic._id)} icon> <Icon name='edit' circular size='small' /></Button>}

@@ -12,11 +12,11 @@ import MarkdownField from '/imports/ui/Parts/MarkdownField'
 const CustomSubmitField = () => (
   <div style={{ textAlign: 'center' }}>
     <Popup
-    content='Saved'
-    on='click'
-    pinned
-    trigger={<SubmitField value='Save' />}
-  />
+      content='Saved'
+      on='click'
+      pinned
+      trigger={<SubmitField value='Save' />}
+    />
   </div>
 )
 
@@ -65,7 +65,7 @@ const CourseEditor = () => {
   return (
     <div style={{ padding: '1rem' }} >
       <Container text>
-        <AutoForm schema={InputSchemaCourseBridge} onSubmit={onSave} model={course} submitField={CustomSubmitField}/>
+        <AutoForm schema={InputSchemaCourseBridge} onSubmit={onSave} model={course} submitField={CustomSubmitField} />
       </Container>
     </div>
   )

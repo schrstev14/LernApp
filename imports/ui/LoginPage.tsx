@@ -68,7 +68,7 @@ const signupSchemaBridge = new SimpleSchemaBridge(signupSchema);
 
 const CustomSubmitField = () => (
   <div style={{ textAlign: 'center' }}>
-    <SubmitField value={LoginButton ? ('Login'):('Sign Up')} />
+    <SubmitField value={LoginButton ? ('Login') : ('Sign Up')} />
   </div>
 )
 
@@ -100,10 +100,10 @@ const signupForm = () => {
       if (error) {
         alert('User Account konnte nicht angelegt werden: ' + error?.message);
       }
-      else{
-      // @ts-ignore
-      Meteor.callAsync('newuserrole', Meteor.userId())
-      console.log(Meteor.userId())
+      else {
+        // @ts-ignore
+        Meteor.callAsync('newuserrole', Meteor.userId())
+        console.log(Meteor.userId())
       }
     });
   };

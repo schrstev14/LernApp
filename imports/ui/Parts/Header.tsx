@@ -29,10 +29,9 @@ const Header = () => {
     active={location.pathname === '/login'}
     onClick={user ? (console.log) : (() => history.push('/login'))}
   />
-
   return (
-    <Menu tabular>
-      <Popup content='HomePage' trigger={<Menu.Item
+    <Menu tabular stackable>
+      <Popup content='Your HomePage' trigger={<Menu.Item
         name='Home'
         icon='home'
         active={location.pathname === '/'}
@@ -42,7 +41,7 @@ const Header = () => {
         style={style}
         on='hover' />
 
-      <Popup content='All Courses' trigger={
+      <Popup content='All Courses to Learn' trigger={
         <Menu.Item
           name='Courses'
           icon='file'
@@ -54,7 +53,7 @@ const Header = () => {
         on='hover' />
 
       {Roles.userIsInRole(user, ['EDIT']) ? (
-        <Popup content='EditPage' trigger={
+        <Popup content='Edit all Content' trigger={
           <Menu.Item
             name='Edit'
             icon='edit'
@@ -66,7 +65,7 @@ const Header = () => {
           on='hover' />) : ('')
       }
       {Roles.userIsInRole(user, ['Admin']) ? (
-        <Popup content='User Managment System' trigger={
+        <Popup content='Manage the Role`s of the Users' trigger={
           <Menu.Item
             name='UserManagement'
             icon='address card'
@@ -75,7 +74,8 @@ const Header = () => {
           />}
           mouseEnterDelay={Delay}
           style={style}
-          on='hover' />) : ('')
+          on='hover'
+          flowing />) : ('')
 
       }
       <Menu.Menu position='right'>
@@ -84,8 +84,8 @@ const Header = () => {
             <Modal
               trigger={loggin}
               header={'Warning !'}
-              content={'You will be logged out'}
-              actions={[{key:'not', content:'abort', negative: true}, { key: 'done', content: 'Yes', positive: true, onClick: () => logout() }]}
+              content={'You will be logged out !'}
+              actions={[{ key: 'not', content: 'abort', negative: true }, { key: 'done', content: 'Yes', positive: true, onClick: () => logout() }]}
             />)
           : (loggin)
         }

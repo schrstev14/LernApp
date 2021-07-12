@@ -11,11 +11,13 @@ import EditPage from '/imports/ui/content-editor/EditPage'
 import UserManagement from '/imports/ui/UserManagement'
 
 export const App = () => {
-  
+
   return (
     <Router>
-      <Header />
-      <div className = 'main' style={{ flexGrow: 1, overflowY: 'auto', paddingTop: '1rem', paddingBottom: '1rem' }}>
+      <div>
+        <Header />
+      </div>
+      <div className='main'>
         <Switch>
           <Route path="/courses">
             <CoursesPage />
@@ -37,7 +39,9 @@ export const App = () => {
           </Route>
         </Switch>
       </div>
-      <Footer />
+      <div>
+        <Footer />
+      </div>
     </Router>
   )
 };
