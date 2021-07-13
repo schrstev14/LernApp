@@ -44,10 +44,10 @@ const CurrentCoursePage = () => {
     <div style={{ flexGrow: 1, padding: '1rem', display: 'flex' }} >
       <div style={{ width: '17rem', marginRight: '2rem' }}>
         <Button circular negative onClick={() => history.push('/courses')}><Icon name='arrow left' /> Back to All Courses </Button>
+        <h1 className='Title'>{course?.title}</h1>
         <List divided relaxed> {topics} </List>
       </div>
       <div>
-        <h1 className='Title'>{course?.title}</h1>
         <MarkdownDisplay markdown={currentTopic?.content} style={{ color: 'black' }} contentClass="fnord" />
       </div>
     </div>

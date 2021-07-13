@@ -26,7 +26,7 @@ const InputSchemaCourse = new SimpleSchema({
   title: {
     type: String,
     min: 5,
-    max: 50
+    max: 25
   },
   description: {
     type: String,
