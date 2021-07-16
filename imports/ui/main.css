@@ -1,0 +1,53 @@
+html, body {
+  font-family: sans-serif;
+  font-size: 105%;
+  height: 100%;
+}
+.ui.menu{
+  margin: 0;
+}
+
+.ui.circular.button {
+  border-radius: 10em;
+  text-align: center;
+}
+
+.ui.circular.negative.button {
+  border-radius: 10em;
+  text-align: center;
+}
+
+.ui.circular.primary.button {
+  border-radius: 10em;
+  text-align: center;
+}
+.ui.tabular.menu .item:hover{
+transform: scale(1.1, 1.1);
+}
+
+.Course:hover{
+  transform: scale(1.1, 1.1);
+  cursor: pointer;
+}
+
+.main{
+  background-image: linear-gradient(to bottom, #44dada, #d3f7f7);
+  flex-grow: 2;
+  overflow-y: auto;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+.ui.tabular.menu .active.item{
+  background-color: #44dada;
+}
+
+.ui.secondary.menu{
+  height:1.5rem
+}
+
+.Title{
+  color: rgb(3, 45, 45);
+  text-transform: capitalize;
+  text-shadow: 2px 2px 2px white;
+}

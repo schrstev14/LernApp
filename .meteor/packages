@@ -7,7 +7,7 @@
 meteor-base@1.4.0             # Packages every Meteor app needs to have
 mobile-experience@1.1.0       # Packages for a great mobile UX
 mongo@1.11.0                   # The database Meteor supports right now
-reactive-var@1.0.11            # Reactive variable for tracker
+reactive-var            # Reactive variable for tracker
 
 standard-minifier-css@1.7.2   # CSS minifier run for production mode
 standard-minifier-js@2.6.0    # JS minifier run for production mode
@@ -17,7 +17,14 @@ typescript@4.2.2              # Enable TypeScript syntax in .ts and .tsx modules
 shell-server@0.5.0            # Server-side component of the `meteor shell` command
 hot-module-replacement@0.2.0  # Update client in development without reloading the page
 
-autopublish@1.0.7             # Publish all data to the clients (for prototyping)
-insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
+#autopublish@1.0.7             # Publish all data to the clients (for prototyping)
+#insecure@1.0.7                # Allow all DB writes from clients (for prototyping)
 static-html             # Define static page content in .html files
 react-meteor-data       # React higher-order component for reactively tracking Meteor data
+alanning:roles
+accounts-password
+cultofcoders:grapher
+aldeed:collection2
+reactive-dict
+grove:call-async
+meteortesting:mocha
